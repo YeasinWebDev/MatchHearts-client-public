@@ -11,8 +11,8 @@ function Navbar() {
     };
 
     return (
-        <>
-            <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2 rounded-xl ${dark ? 'bg-[#232121]' : 'bg-[#F2f2f2]'}`}>
+        <div className='bg-[#302F2A]'>
+            <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2 rounded-xl  bg-[#302F2A]`}>
 
                 {/* left */}
                 <div className='w-16 h-16 rounded-xl'>
@@ -26,30 +26,30 @@ function Navbar() {
 
                 {/* Menu for large screens */}
                 <div className={`hidden lg:flex ${dark ? 'bg-[#232121] text-white' : 'bg-[#F2f2f2] text-black'}`}>
-                    <ul className='flex justify-center gap-5'>
-                        <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Home</li></NavLink>
-                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Biodatas</li></NavLink>
-                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>About Us</li></NavLink>
-                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Contact Us</li></NavLink>
-                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Login</li></NavLink>
-                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Dashboard</li></NavLink>
+                    <ul className='flex bg-[#302F2A] justify-center gap-5'>
+                        <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Home</NavLink>
+                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Biodatas</NavLink>
+                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>About Us</NavLink>
+                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Contact Us</NavLink>
+                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Login</NavLink>
+                        <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
                     </ul>
                 </div>
 
             </div>
 
             {/* Menu for small screens */}
-            <div className={`${isOpen ? 'block transition-all' : 'hidden transition-all'} z-50 absolute transform transition-transform duration-300 ease-in-out px-8 py-5  rounded-xl lg:hidden ${dark ? 'bg-[#232121] text-white' : 'bg-[#F2f2f2] text-black'} border-2`}>
-                <ul className='flex flex-col  gap-2 py-2'>
-                    <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Home</li></NavLink>
-                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Biodatas</li></NavLink>
-                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>About Us</li></NavLink>
-                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Contact Us</li></NavLink>
-                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Login</li></NavLink>
-                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Dashboard</li></NavLink>
+            <div className={`${isOpen ? 'block transition-all' : 'hidden transition-all'} z-50  absolute transform transition-transform duration-300 ease-in-out px-8 py-5  rounded-xl lg:hidden bg-[#302F2A] border-2`}>
+                <ul className='flex flex-col bg-[#302F2A]  gap-2 py-2'>
+                    <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Home</NavLink>
+                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Biodatas</NavLink>
+                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>About Us</NavLink>
+                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Contact Us</NavLink>
+                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Login</NavLink>
+                    <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
                 </ul>
             </div>
-        </>
+        </div>
     )
 }
 
