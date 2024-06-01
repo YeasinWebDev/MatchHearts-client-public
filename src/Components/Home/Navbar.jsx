@@ -25,7 +25,7 @@ function Navbar() {
                 </div>
 
                 {/* Menu for large screens */}
-                <div className={`hidden lg:flex ${dark ? 'bg-[#232121] text-white' : 'bg-[#FFFFFF] text-black'}`}>
+                <div className={`hidden lg:flex ${dark ? 'bg-[#232121] text-white' : 'bg-[#F2f2f2] text-black'}`}>
                     <ul className='flex justify-center gap-5'>
                         <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Home</li></NavLink>
                         <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Biodatas</li></NavLink>
@@ -39,7 +39,7 @@ function Navbar() {
             </div>
 
             {/* Menu for small screens */}
-            <div className={`${isOpen ? 'block transition-all' : 'hidden transition-all'} z-50 absolute transform transition-transform duration-300 ease-in-out px-8 py-5  rounded-xl lg:hidden ${dark ? 'bg-[#232121] text-white' : 'bg-[#FFFFFF] text-black'} border-2`}>
+            <div className={`${isOpen ? 'block transition-all' : 'hidden transition-all'} z-50 absolute transform transition-transform duration-300 ease-in-out px-8 py-5  rounded-xl lg:hidden ${dark ? 'bg-[#232121] text-white' : 'bg-[#F2f2f2] text-black'} border-2`}>
                 <ul className='flex flex-col  gap-2 py-2'>
                     <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Home</li></NavLink>
                     <NavLink to={'#'} className={({ isActive }) => `font-semibold text-lg border-b-2 cursor-pointer ${isActive ? 'bg-[#FF6F61] rounded-xl p-2' : 'p-2'}`}><li>Biodatas</li></NavLink>
