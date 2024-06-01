@@ -15,7 +15,6 @@ function PremiumMembers() {
         }
     })
 
-    console.log(data)
 
     const handleSortOrderChange = (e) =>{
         setSortOrder(e.target.value);
