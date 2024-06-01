@@ -6,16 +6,28 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Route from './Page/Route';
+import ErrorPage from './Page/ErrorPage';
+import Home from './Page/Home';
+import ContextProvider from './Auth/ContextProvider';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Route/>,
+    element: <Route />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      }
+    ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  // <React.StrictMode>
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
+  // </React.StrictMode>,
 )

@@ -1,8 +1,13 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
+import Navbar from '../Components/Home/Navbar'
 
 function Route() {
   return (
-    <div>Route</div>
+    <>
+      <Navbar />
+      <Outlet />
+    </>
   )
 }
 
