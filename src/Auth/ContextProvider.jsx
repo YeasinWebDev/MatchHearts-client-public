@@ -6,7 +6,7 @@ import axios from 'axios';
 export const AuthContext = createContext(null)
 function ContextProvider({ children }) {
 
-    const [dark, setDark] = useState(true)
+    const [dark, setDark] = useState(false)
     const [user, setUser] = useState(null)
     const [loading, setloading] = useState(true)
     const [disable, setDisable] = useState(false)
