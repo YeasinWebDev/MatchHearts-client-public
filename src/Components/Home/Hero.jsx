@@ -9,7 +9,7 @@ function Hero() {
         <p className="text-center md:text-md max-w-lg pb-10">
           Welcome to <span className='text-orange-400 font-semibold text-lg'>MatchHearts</span>, where love meets destiny. Our platform is dedicated to helping you find your soulmate. With personalized matches and advanced search options, your journey to a blissful partnership begins here.
         </p>
-        <Link to={'/bioDatas'}> <button className='bg-[#FF6F61] p-3 text-lg font-semibold rounded-xl'>See All</button></Link>
+        <Link to={'/bioDatas'}> <button className='bg-[#302F2A] p-3 text-lg font-semibold rounded-xl'>See All</button></Link>
       </div>
     </div>
   );
