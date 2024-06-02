@@ -13,6 +13,7 @@ import ContextProvider from './Auth/ContextProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Login from './Page/Login';
 import SignUp from './Page/SignUp';
+import AboutUs from './Page/AboutUs';
 
 
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path:'/signup',
         element:<SignUp/>
+      },
+      {
+        path:"/aboutUs",
+        element:<AboutUs/>
       }
     ]
   },
