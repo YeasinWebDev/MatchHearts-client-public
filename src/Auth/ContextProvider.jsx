@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from './firebaseConfig'
 import axios from 'axios';
+import { auth } from './firebaseConfig';
 
 export const AuthContext = createContext(null)
 function ContextProvider({ children }) {
@@ -32,24 +32,11 @@ function ContextProvider({ children }) {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            const userEmail = currentUser?.email || user?.email
-            const loggedUser = { email: userEmail }
             if (currentUser) {
-                axios.post('https://a11-server-phi.vercel.app/jwt',
-                    loggedUser,
-                    { withCredentials: true },
-                )
-                    .then((res) => {
-                        setUser(currentUser)
-                        setloading(false);
-
-                    })
+                setUser(currentUser)
+                setloading(false);
             } else {
                 setUser(null);
-                axios.post('https://a11-server-phi.vercel.app/logout',
-                    loggedUser,
-                    { withCredentials: true },
-                )
                 setloading(false);
 
             }

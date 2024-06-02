@@ -9,7 +9,9 @@ function Route() {
     <div className='bg-[#302F2A]'>
       <Navbar />
     </div>
+      <div className='w-full min-h-screen'>
       <Outlet />
+      </div>
       <Footer/>
     </>
   )
