@@ -4,21 +4,23 @@ import { NavLink } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 function Navbar() {
-    const { dark, user,LogOut } = useContext(AuthContext);
+    const { dark, user, LogOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState(false);
 
     const logoutClick = () => {
         <Navigator to='/' />
         toast.success('Logged Out Successfully')
         LogOut()
-      }
+        setShow(false)
+    }
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
     return (
-        <div className='bg-[#302F2A]'>
+        <div className='bg-[#302F2A] relative'>
             <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2 rounded-xl  bg-[#302F2A]`}>
 
                 {/* left */}
@@ -41,8 +43,21 @@ function Navbar() {
                         {
                             user ?
                                 <>
-                                    <h1 onClick={logoutClick} className='flex cursor-pointer items-center justify-center font-semibold text-lg text-white bg-[]'>LogOut</h1>
-                                    <NavLink to={'/dashboard'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
+                                    {
+                                        show &&
+                                        <div className='flex flex-col absolute bg-[#302F2A] top-[80%] right-8 gap-2  z-50 p-5 rounded-xl border-2 border-white'>
+                                            <h1 onClick={logoutClick} className='flex cursor-pointer items-center justify-center font-semibold text-lg text-white border-2 p-2 rounded-xl '>LogOut</h1>
+                                            <NavLink to={'/dashboard'} onClick={() => setShow(false)} className={({ isActive }) => `font-semibold text-lg  cursor-pointer text-white border-2 p-2 rounded-xl `}>Dashboard</NavLink>
+                                        </div>
+                                    }
+                                    <div className='w-10 h-10'>
+                                        <img
+                                            onClick={() => setShow(!show)}
+                                            className='rounded-full w-full h-full cursor-pointer'
+                                            referrerPolicy='no-referrer'
+                                            src={user?.photoURL || 'https://thumbs.dreamstime.com/b/unknown-male-avatar-profile-image-businessman-vector-unknown-male-avatar-profile-image-businessman-vector-profile-179373829.jpg'} alt=""
+                                        />
+                                    </div>
                                 </> :
                                 <>
                                     <NavLink to={'/login'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Login</NavLink>
@@ -64,8 +79,15 @@ function Navbar() {
                     {
                         user ?
                             <>
-                                <h1 onClick={logoutClick} className='flex cursor-pointer justify-center font-semibold text-lg text-white bg-[]'>LogOut</h1>
+                                <h1 onClick={logoutClick} className='flex cursor-pointer justify-center font-semibold text-lg text-white'>LogOut</h1>
                                 <NavLink onClick={toggleMenu} to={'/dashboard'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
+                                <div className='w-10 h-10'>
+                                    <img
+                                        className='rounded-full w-full h-full'
+                                        referrerPolicy='no-referrer'
+                                        src={user?.photoURL || 'https://thumbs.dreamstime.com/b/unknown-male-avatar-profile-image-businessman-vector-unknown-male-avatar-profile-image-businessman-vector-profile-179373829.jpg'} alt=""
+                                    />
+                                </div>
                             </> :
                             <>
                                 <NavLink onClick={toggleMenu} to={'/login'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Login</NavLink>
