@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import toast from 'react-hot-toast';
 
 function ContactUs() {
+    const formRef = useRef(null);
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle form submission logic here
+        toast.success("Thank you for your Massage")
+        formRef.current.reset();
     };
 
     return (
@@ -30,7 +34,7 @@ function ContactUs() {
 
                 <div className="lg:w-1/2">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-5">Send Us a Message</h2>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-600">Name</label>
                             <input
