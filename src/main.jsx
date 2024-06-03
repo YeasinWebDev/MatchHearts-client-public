@@ -15,6 +15,7 @@ import Login from './Page/Login';
 import SignUp from './Page/SignUp';
 import AboutUs from './Page/AboutUs';
 import ContactUs from './Page/ContactUs';
+import BiodatasPage from './Page/BiodatasPage';
 
 
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path:'/contactUs',
         element:<ContactUs/>
+      },
+      {
+        path:'/biodatas',
+        element:<BiodatasPage/>
       }
     ]
   },

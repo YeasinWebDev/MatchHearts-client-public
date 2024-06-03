@@ -4,15 +4,19 @@ import PremiumMembers from '../Components/Home/PremiumMembers'
 import HowItWork from '../Components/Home/HowItWork'
 import SuccessCounter from '../Components/Home/SuccessCounter'
 import SuccessStories from '../Components/Home/SuccessStories'
+import { Helmet } from 'react-helmet'
 
 function Home() {
   return (
     <div>
-      <Hero/>
-      <PremiumMembers/>
-      <HowItWork/>
-      <SuccessCounter/>
-      <SuccessStories/>
+      <Helmet>
+        <title>MatchHearts || Home</title>
+      </Helmet>
+      <Hero />
+      <PremiumMembers />
+      <HowItWork />
+      <SuccessCounter />
+      <SuccessStories />
     </div>
   )
 }

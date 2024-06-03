@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 
 function ContactUs() {
@@ -12,8 +13,11 @@ function ContactUs() {
 
     return (
         <div className="container mx-auto py-10 px-5">
+            <Helmet>
+                <title>MatchHearts || Contact Us</title>
+            </Helmet>
             <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">Contact Us</h1>
-            
+
             <p className="text-lg text-center text-gray-700 mb-10">
                 We would love to hear from you! Whether you have a question about our services, need assistance, or just want to share your experience, please don't hesitate to reach out.
             </p>
