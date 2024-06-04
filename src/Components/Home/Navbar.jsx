@@ -79,7 +79,7 @@ function Navbar() {
                     {
                         user ?
                             <>
-                                <h1 onClick={logoutClick} className='flex cursor-pointer justify-center font-semibold text-lg text-white'>LogOut</h1>
+                                <h1 onClick={logoutClick} className='flex cursor-pointer ml-2 font-semibold text-lg text-white'>LogOut</h1>
                                 <NavLink onClick={toggleMenu} to={'/dashboard'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
                                 <div className='w-10 h-10'>
                                     <img

@@ -27,7 +27,6 @@ function BioDataDeatils() {
         }
     })
 
-    console.log(role)
 
     return (
         <div>

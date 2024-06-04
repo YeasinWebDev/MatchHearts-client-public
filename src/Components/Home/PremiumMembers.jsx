@@ -39,16 +39,16 @@ function PremiumMembers() {
                     <option value="descending">Descending</option>
                 </select>
             </div>
-            <div className='flex justify-center items-center gap-5 flex-wrap'>
+            <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mr-20 lg:mr-0'>
                 {sortedData?.map(member => (
-                    <div key={member._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6  mx-20">
-                        <img src={member.profileImage} alt={`Profile of ${member.type}`} className=" lg:w-[20vw] flex items-center justify-center h-48 object-cover rounded-md mb-4" />
-                        <div className=" flex flex-col w-full">
+                    <div key={member._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 lg:w-80 w-[18rem] mx-20">
+                        <img src={member.profileImage} alt={`Profile of ${member.type}`} className=" lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
+                        <div className=" flex flex-col  w-full">
                             <h3 className="text-xl font-semibold">biodata id: {member.biodata_id}</h3>
                             <h3 className="text-xl font-semibold flex gap-2 ">Biodata Type: <span className='text-orange-400 font-semibold'>{member.biodataType}</span></h3>
-                            <p className="text-black text-xl"><span className='font-semibold'> Division:</span> {member.permanentDivision}</p>
-                            <p className="text-black text-xl"><span className='font-semibold'> Age:</span> <span className='text-orange-400 font-semibold'>{member.age}</span> years old</p>
-                            <p className="text-black text-xl"><span className='font-semibold'> Occupation:</span> {member.occupation}</p>
+                            <h3 className="text-black text-xl"><span className='font-semibold'> Division:</span> {member.permanentDivision}</h3>
+                            <h3 className="text-black text-xl"><span className='font-semibold'> Age:</span> <span className='text-orange-400 font-semibold'>{member.age}</span> years old</h3>
+                            <h3 className="text-black text-xl whitespace-nowrap"><span className='font-semibold'> Occupation:</span> {member.occupation}</h3>
                             <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button>
                         </div>
                     </div>
