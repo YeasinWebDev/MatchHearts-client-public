@@ -16,6 +16,8 @@ import SignUp from './Page/SignUp';
 import AboutUs from './Page/AboutUs';
 import ContactUs from './Page/ContactUs';
 import BiodatasPage from './Page/BiodatasPage';
+import BioDataDeatils from './Page/BioDataDeatils';
+import PrivateRoute from './Route/PrivateRoute';
 
 
 
@@ -32,24 +34,28 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path:'/login',
-        element:<Login/>
+        path: '/login',
+        element: <Login />
       },
       {
-        path:'/signup',
-        element:<SignUp/>
+        path: '/signup',
+        element: <SignUp />
       },
       {
-        path:"/aboutUs",
-        element:<AboutUs/>
+        path: "/aboutUs",
+        element: <AboutUs />
       },
       {
-        path:'/contactUs',
-        element:<ContactUs/>
+        path: '/contactUs',
+        element: <ContactUs />
       },
       {
-        path:'/biodatas',
-        element:<BiodatasPage/>
+        path: '/biodatas',
+        element: <BiodatasPage />
+      },
+      {
+        path: '/details/:id',
+        element: <PrivateRoute><BioDataDeatils /></PrivateRoute>
       }
     ]
   },
@@ -60,6 +66,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ContextProvider>
       <RouterProvider router={router} />
     </ContextProvider>
-    <Toaster/>
+    <Toaster />
   </QueryClientProvider>
 )

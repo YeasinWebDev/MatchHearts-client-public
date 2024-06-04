@@ -5,6 +5,7 @@ import makeAnimated from 'react-select/animated';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosCommon from '../Hooks/useAxiosCommon';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 
 // TODO : Add More Data To the Back End
@@ -76,7 +77,7 @@ function BiodatasPage() {
       <div className=' mx-0 md:mx-20 flex  gap-10 justify-between'>
 
         {/* filter */}
-        <div className='w-[20%] min-h-screen rounded-xl'>
+        <div className='w-[35%] xl:w-[20%] min-h-screen rounded-xl'>
           <div className='mt-4  top-10 w-full h-fit border-2 p-10 rounded-xl'>
             <h1 className='text-2xl w-full text-[#302F2A] font-semibold  flex justify-center border-b-2'>Filter</h1>
 
@@ -123,8 +124,8 @@ function BiodatasPage() {
         </div>
 
         {/* biodatas */}
-        <div className='w-[80%]'>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+        <div className='w-[65%] xl:w-[80%]'>
+          <div className='flex justify-center flex-wrap gap-5'>
             {filteredBiodatas?.map((biodata) => (
               <div key={biodata._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6">
                 <img src={biodata.profileImage} alt={`Profile of ${biodata.type}`} className=" lg:w-[20vw] flex items-center justify-center h-48 object-cover rounded-md mb-4" />
@@ -134,7 +135,7 @@ function BiodatasPage() {
                   <p className="text-black text-xl"><span className='font-semibold'> Division:</span> {biodata.permanentDivision}</p>
                   <p className="text-black text-xl"><span className='font-semibold'> Age:</span> <span className='text-orange-400 font-semibold'>{biodata.age}</span> years old</p>
                   <p className="text-black text-xl"><span className='font-semibold'> Occupation:</span> {biodata.occupation}</p>
-                  <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button>
+                  <Link to={`/details/${biodata._id}`}> <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button></Link>
                 </div>
               </div>
             ))}

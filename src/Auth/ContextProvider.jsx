@@ -20,11 +20,12 @@ function ContextProvider({ children }) {
         return createUserWithEmailAndPassword(auth, email, pass);
     };
     const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-          displayName: name,
-          photoURL: photo,
+        setloading(true);
+        return updateProfile(auth?.currentUser, {
+            displayName: name,
+            photoURL: photo,
         })
-      }
+    }
 
     const signIn = (email, pass) => {
         setloading(true)
@@ -36,10 +37,25 @@ function ContextProvider({ children }) {
         signOut(auth)
     }
 
+
+    // save user
+    const saveUser = async user => {
+        const currentuser = {
+            email: user?.email,
+            role: "normal",
+        }
+
+        const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, currentuser)
+        return data
+    }
+
+    
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             if (currentUser) {
                 setUser(currentUser)
+                saveUser(currentUser)
                 setloading(false);
             } else {
                 setUser(null);
@@ -54,7 +70,7 @@ function ContextProvider({ children }) {
 
 
 
-    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable,updateUserProfile }
+    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile }
     return (
         <AuthContext.Provider value={authinfo}>
             {children}
