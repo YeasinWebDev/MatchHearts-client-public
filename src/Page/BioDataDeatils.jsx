@@ -1,14 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import useAxiosCommon from '../Hooks/useAxiosCommon'
 import { GiBodyHeight } from "react-icons/gi";
 import { AuthContext } from '../Auth/ContextProvider';
+
+
 
 function BioDataDeatils() {
     const { id } = useParams()
     const axiosCommon = useAxiosCommon()
     const { user } = useContext(AuthContext)
+    const [biodataType, setBiodataType] = useState(null);
+    const [biodataId, setBiodataId] = useState(null);
 
     const { data: role = [] } = useQuery({
         queryKey: ['role', user?.email],
@@ -19,14 +23,35 @@ function BioDataDeatils() {
     });
 
 
-    const { data: Biodata = [] } = useQuery({
+    const { data: Biodata = [], isSuccess: biodataSuccess } = useQuery({
         queryKey: ['biodata', id],
         queryFn: async () => {
             const response = await axiosCommon.get(`/bioDatas/${id}`)
             return response.data
-        }
-    })
+        },
+    });
 
+    useEffect(() => {
+        if (biodataSuccess) {
+            setBiodataType(Biodata.biodataType);
+            setBiodataId(Biodata.biodata_id)
+        }
+        window.scrollTo(0, 0);
+    }, [biodataSuccess, Biodata.biodataType]);
+
+    const { data: relatedData = [], } = useQuery({
+        queryKey: ['relatedBiodata', biodataType],
+        queryFn: async () => {
+            const response = await axiosCommon.get(`/relatedData`, { params: { biodataType: biodataType } });
+            return response.data;
+        },
+        enabled: !!biodataType,
+    });
+
+    const filterData = relatedData.filter(a => a.biodata_id !== biodataId)
+    // if(relatedData.map(a => a.biodataType) === biodataId){
+    //     return
+    // }
 
     return (
         <div>
@@ -105,7 +130,7 @@ function BioDataDeatils() {
                                         <h1 className='font-semibold text-2xl'>Mobile Number: <span className='pl-2 text-orange-600'>{Biodata?.mobileNumber}</span></h1>
                                     </>
                                     :
-                                    <button className='border-2 p-2 border-black rounded-xl font-semibold'>Contact Request</button>
+                                    <Link to={`/checkoutPage/${Biodata?.biodata_id}`}> <button className='border-2 p-2 border-black rounded-xl font-semibold'>Contact Request</button></Link>
                                 }
                             </div>
                             <button className='border-2 border-black p-3 rounded-xl'><img className='w-10' src="https://i.ibb.co/843G0Vw/wishlist.png" alt="" /></button>
@@ -113,6 +138,29 @@ function BioDataDeatils() {
                     </div>
                 </div>
 
+                {/* relatebal data */}
+
+                <div className='mx-20 py-10'>
+                    <h1 className='text-2xl font-semibold flex justify-center py-5'>Related Profile</h1>
+
+                    <div className='flex justify-center items-center gap-5 flex-wrap'>
+                        {
+                            filterData?.slice(0,3).map(member => (
+                                <div key={member._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 lg:w-80 w-[18rem] mx-20">
+                                    <img src={member.profileImage} alt={`Profile of ${member.type}`} className=" lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
+                                    <div className=" flex flex-col  w-full">
+                                        <h3 className="text-xl font-semibold">biodata id: {member.biodata_id}</h3>
+                                        <h3 className="text-xl font-semibold flex gap-2 ">Biodata Type: <span className='text-orange-400 font-semibold'>{member.biodataType}</span></h3>
+                                        <h3 className="text-black text-xl"><span className='font-semibold'> Division:</span> {member.permanentDivision}</h3>
+                                        <h3 className="text-black text-xl"><span className='font-semibold'> Age:</span> <span className='text-orange-400 font-semibold'>{member.age}</span> years old</h3>
+                                        <h3 className="text-black text-xl whitespace-nowrap"><span className='font-semibold'> Occupation:</span> {member.occupation}</h3>
+                                        <Link to={`/details/${member._id}`}> <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button></Link>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )

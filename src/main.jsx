@@ -18,6 +18,7 @@ import ContactUs from './Page/ContactUs';
 import BiodatasPage from './Page/BiodatasPage';
 import BioDataDeatils from './Page/BioDataDeatils';
 import PrivateRoute from './Route/PrivateRoute';
+import CheckoutPage from './Page/CheckoutPage';
 
 
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: '/details/:id',
         element: <PrivateRoute><BioDataDeatils /></PrivateRoute>
+      },
+      {
+        path:"/checkoutPage/:id",
+        element:<PrivateRoute><CheckoutPage/></PrivateRoute>
       }
     ]
   },

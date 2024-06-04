@@ -83,55 +83,55 @@ function BiodatasPage() {
         </button>
       </div>
 
-      <div className='mx-0 md:mx-20 flex flex-col md:flex-row gap-10 justify-between'>
-        <Drawer open={open} onClose={toggleDrawer(false)}>
-          <div className='mt-4 top-10 w-full h-fit border-2 p-10'>
-            <h1 className='text-2xl w-full text-[#302F2A] font-semibold flex justify-center border-b-2'>Filter</h1>
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+        <div className='mt-4 top-10 w-full h-fit border-2 p-10'>
+          <h1 className='text-2xl w-full text-[#302F2A] font-semibold flex justify-center border-b-2'>Filter</h1>
 
-            {/* filter by age */}
-            <div className='border-b-2 pb-2'>
-              <h1 className='flex justify-center py-5 font-semibold text-xl'>By Age</h1>
-              <Slider
-                value={ageRange}
-                onChange={handleAgeRangeChange}
-                valueLabelDisplay="auto"
-                min={18}
-                max={100}
-              />
-              <div className='flex justify-between mt-2'>
-                <span className='font-semibold'>{ageRange[0]}</span>
-                <span className='font-semibold'>{ageRange[1]}</span>
-              </div>
-            </div>
-
-            {/* filter by gender */}
-            <div className='border-b-2 pb-2'>
-              <h1 className='flex justify-center py-5 font-semibold text-xl'>By Gender</h1>
-              <div className='flex justify-between mt-2 gap-10'>
-                <span className='flex items-center justify-center gap-2'>Male <input type="checkbox" name="Male" checked={selectedGenders.includes('Male')} onChange={handleGenderChange} /></span>
-                <span className='flex items-center justify-center gap-2'>Female <input type="checkbox" name="Female" checked={selectedGenders.includes('Female')} onChange={handleGenderChange} /></span>
-              </div>
-            </div>
-
-            {/* filter by division */}
-            <div>
-              <h1 className='flex justify-center py-5 font-semibold text-xl'>By Division</h1>
-              <Select
-                components={animatedComponents}
-                isMulti
-                name="divisions"
-                options={options}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                onChange={handleDivisionChange}
-                value={selectedOption} 
-              />
+          {/* filter by age */}
+          <div className='border-b-2 pb-2'>
+            <h1 className='flex justify-center py-5 font-semibold text-xl'>By Age</h1>
+            <Slider
+              value={ageRange}
+              onChange={handleAgeRangeChange}
+              valueLabelDisplay="auto"
+              min={18}
+              max={100}
+            />
+            <div className='flex justify-between mt-2'>
+              <span className='font-semibold'>{ageRange[0]}</span>
+              <span className='font-semibold'>{ageRange[1]}</span>
             </div>
           </div>
-        </Drawer>
+
+          {/* filter by gender */}
+          <div className='border-b-2 pb-2'>
+            <h1 className='flex justify-center py-5 font-semibold text-xl'>By Gender</h1>
+            <div className='flex justify-between mt-2 gap-10'>
+              <span className='flex items-center justify-center gap-2'>Male <input type="checkbox" name="Male" checked={selectedGenders.includes('Male')} onChange={handleGenderChange} /></span>
+              <span className='flex items-center justify-center gap-2'>Female <input type="checkbox" name="Female" checked={selectedGenders.includes('Female')} onChange={handleGenderChange} /></span>
+            </div>
+          </div>
+
+          {/* filter by division */}
+          <div>
+            <h1 className='flex justify-center py-5 font-semibold text-xl'>By Division</h1>
+            <Select
+              components={animatedComponents}
+              isMulti
+              name="divisions"
+              options={options}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={handleDivisionChange}
+              value={selectedOption}
+            />
+          </div>
+        </div>
+      </Drawer>
+      <div className='mx-0 md:mx-20 flex flex-col md:flex-row gap-10 justify-between'>
 
         {/* filter */}
-        <div className={`w-full md:w-[35%] xl:w-[20%] min-h-screen rounded-xl hidden lg:block`}>
+        <div className={`w-full sticky top-0 md:w-[35%] xl:w-[20%] min-h-screen rounded-xl hidden lg:block`}>
           <div className='mt-4 top-10 w-full h-fit border-2 p-10 rounded-xl'>
             <h1 className='text-2xl w-full text-[#302F2A] font-semibold flex justify-center border-b-2'>Filter</h1>
 

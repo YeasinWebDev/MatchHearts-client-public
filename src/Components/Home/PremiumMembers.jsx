@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 import useAxiosCommon from '../../Hooks/useAxiosCommon'
+import { Link } from 'react-router-dom';
 
 function PremiumMembers() {
     const axiosCommon = useAxiosCommon()
@@ -49,7 +50,7 @@ function PremiumMembers() {
                             <h3 className="text-black text-xl"><span className='font-semibold'> Division:</span> {member.permanentDivision}</h3>
                             <h3 className="text-black text-xl"><span className='font-semibold'> Age:</span> <span className='text-orange-400 font-semibold'>{member.age}</span> years old</h3>
                             <h3 className="text-black text-xl whitespace-nowrap"><span className='font-semibold'> Occupation:</span> {member.occupation}</h3>
-                            <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button>
+                            <Link to={`/details/${member._id}`}> <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button></Link>
                         </div>
                     </div>
                 ))}
