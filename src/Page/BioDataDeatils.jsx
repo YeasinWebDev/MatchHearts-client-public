@@ -4,12 +4,13 @@ import { Link, useParams } from 'react-router-dom'
 import useAxiosCommon from '../Hooks/useAxiosCommon'
 import { GiBodyHeight } from "react-icons/gi";
 import { AuthContext } from '../Auth/ContextProvider';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 
 
 function BioDataDeatils() {
     const { id } = useParams()
-    const axiosCommon = useAxiosCommon()
+    const axiosSecure = useAxiosSecure()
     const { user,setBioId } = useContext(AuthContext)
     const [biodataType, setBiodataType] = useState(null);
     const [biodataId, setBiodataId] = useState(null);
@@ -17,7 +18,7 @@ function BioDataDeatils() {
     const { data: role = [] } = useQuery({
         queryKey: ['role', user?.email],
         queryFn: async () => {
-            const response = await axiosCommon.get(`/user`, { params: { email: user.email } });
+            const response = await axiosSecure.get(`/user`, { params: { email: user.email } });
             return response.data;
         }
     });
@@ -26,7 +27,7 @@ function BioDataDeatils() {
     const { data: Biodata = [], isSuccess: biodataSuccess } = useQuery({
         queryKey: ['biodata', id],
         queryFn: async () => {
-            const response = await axiosCommon.get(`/bioDatas/${id}`)
+            const response = await axiosSecure.get(`/bioDatas/${id}`)
             return response.data
         },
     });
@@ -42,7 +43,7 @@ function BioDataDeatils() {
     const { data: relatedData = [], } = useQuery({
         queryKey: ['relatedBiodata', biodataType],
         queryFn: async () => {
-            const response = await axiosCommon.get(`/relatedData`, { params: { biodataType: biodataType } });
+            const response = await axiosSecure.get(`/relatedData`, { params: { biodataType: biodataType } });
             return response.data;
         },
         enabled: !!biodataType,
