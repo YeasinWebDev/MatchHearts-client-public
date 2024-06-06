@@ -10,7 +10,7 @@ import { AuthContext } from '../Auth/ContextProvider';
 function BioDataDeatils() {
     const { id } = useParams()
     const axiosCommon = useAxiosCommon()
-    const { user } = useContext(AuthContext)
+    const { user,setBioId } = useContext(AuthContext)
     const [biodataType, setBiodataType] = useState(null);
     const [biodataId, setBiodataId] = useState(null);
 
@@ -49,9 +49,6 @@ function BioDataDeatils() {
     });
 
     const filterData = relatedData.filter(a => a.biodata_id !== biodataId)
-    // if(relatedData.map(a => a.biodataType) === biodataId){
-    //     return
-    // }
 
     return (
         <div>
@@ -109,7 +106,7 @@ function BioDataDeatils() {
                             <div className='flex justify-center items-center gap-10 flex-wrap py-5'>
                                 <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                     <GiBodyHeight size={30} />
-                                    <h3 className="text-4xl font-bold text-orange-400">{Biodata.expectedPartnerHeight}</h3>
+                                    <h3 className="text-4xl font-bold text-orange-400">{Biodata?.expectedPartnerHeight}</h3>
                                 </div>
                                 <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                     <img className='w-10' src="https://i.ibb.co/0r0hvsg/age-icon.png" alt="" />
@@ -130,7 +127,13 @@ function BioDataDeatils() {
                                         <h1 className='font-semibold text-2xl'>Mobile Number: <span className='pl-2 text-orange-600'>{Biodata?.mobileNumber}</span></h1>
                                     </>
                                     :
-                                    <Link to={`/checkoutPage/${Biodata?.biodata_id}`}> <button className='border-2 p-2 border-black rounded-xl font-semibold'>Contact Request</button></Link>
+                                    <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
+                                        <button onClick={() => setBioId(id)} disabled={Biodata.requested === 'true'} className='border-2 p-2 border-black rounded-xl font-semibold'>
+                                            {
+                                                Biodata.requested === 'true'? 'Requested' : 'Contact Request'
+                                            }
+                                        </button>
+                                    </Link>
                                 }
                             </div>
                             <button className='border-2 border-black p-3 rounded-xl'><img className='w-10' src="https://i.ibb.co/843G0Vw/wishlist.png" alt="" /></button>
@@ -145,7 +148,7 @@ function BioDataDeatils() {
 
                     <div className='flex justify-center items-center gap-5 flex-wrap'>
                         {
-                            filterData?.slice(0,3).map(member => (
+                            filterData?.slice(0, 3).map(member => (
                                 <div key={member._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 lg:w-80 w-[18rem] mx-20">
                                     <img src={member.profileImage} alt={`Profile of ${member.type}`} className=" lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
                                     <div className=" flex flex-col  w-full">

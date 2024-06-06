@@ -10,6 +10,7 @@ function ContextProvider({ children }) {
     const [user, setUser] = useState(null)
     const [loading, setloading] = useState(true)
     const [disable, setDisable] = useState(false)
+    const [bioId, setBioId] = useState('')
     const logInByGoogle = () => {
         setloading(true)
         const provider = new GoogleAuthProvider();
@@ -70,7 +71,7 @@ function ContextProvider({ children }) {
 
 
 
-    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile }
+    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile,bioId,setBioId }
     return (
         <AuthContext.Provider value={authinfo}>
             {children}
