@@ -11,7 +11,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 function BioDataDeatils() {
     const { id } = useParams()
     const axiosSecure = useAxiosSecure()
-    const { user,setBioId } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [biodataType, setBiodataType] = useState(null);
     const [biodataId, setBiodataId] = useState(null);
 
@@ -129,10 +129,8 @@ function BioDataDeatils() {
                                     </>
                                     :
                                     <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
-                                        <button onClick={() => setBioId(id)} disabled={Biodata.requested === 'true'} className='border-2 p-2 border-black rounded-xl font-semibold'>
-                                            {
-                                                Biodata.requested === 'true'? 'Requested' : 'Contact Request'
-                                            }
+                                        <button className='border-2 p-2 border-black rounded-xl font-semibold'>                                            
+                                               Contact Request
                                         </button>
                                     </Link>
                                 }

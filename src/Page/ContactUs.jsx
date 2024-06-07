@@ -12,7 +12,7 @@ function ContactUs() {
     };
 
     return (
-        <div className="container mx-auto py-10 px-5">
+        <div className="w-full min-h-screen mx-auto py-10 px-5 bg-[#FEFBF0]">
             <Helmet>
                 <title>MatchHearts || Contact Us</title>
             </Helmet>
@@ -22,7 +22,7 @@ function ContactUs() {
                 We would love to hear from you! Whether you have a question about our services, need assistance, or just want to share your experience, please don't hesitate to reach out.
             </p>
 
-            <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-10">
+            <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-10 lg:mx-20">
                 <div className="mb-10 lg:mb-0 lg:w-1/2">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-5">Contact Information</h2>
                     <p className="text-lg text-gray-700 mb-5">
