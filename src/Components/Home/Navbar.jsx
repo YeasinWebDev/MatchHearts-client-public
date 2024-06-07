@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Auth/ContextProvider';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import useRole from '../../Hooks/useRole';
 
 function Navbar() {
     const { dark, user, LogOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false);
+    const [role] = useRole()
 
     const logoutClick = () => {
         <Navigator to='/' />
@@ -24,9 +26,9 @@ function Navbar() {
             <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2 rounded-xl  bg-[#302F2A]`}>
 
                 {/* left */}
-                <div className='w-16 h-16 rounded-xl'>
+                <Link to={'/'}><div className='w-16 h-16 rounded-xl'>
                     <img className='w-full h-full rounded-xl' src="https://i.ibb.co/0JfPLPG/main.png" alt="" />
-                </div>
+                </div></Link>
 
                 {/* right */}
                 <div className={`lg:hidden ${dark ? 'text-white' : "text-black"}`} onClick={toggleMenu}>
@@ -47,7 +49,7 @@ function Navbar() {
                                         show &&
                                         <div className='flex flex-col absolute bg-[#302F2A] top-[80%] right-8 gap-2  z-50 p-5 rounded-xl border-2 border-white'>
                                             <h1 onClick={logoutClick} className='flex cursor-pointer items-center justify-center font-semibold text-lg text-white border-2 p-2 rounded-xl '>LogOut</h1>
-                                            <NavLink to={'/dashboard'} onClick={() => setShow(false)} className={({ isActive }) => `font-semibold text-lg  cursor-pointer text-white border-2 p-2 rounded-xl `}>Dashboard</NavLink>
+                                            <NavLink to={role=== 'normal' ? '/dashboard/biodata': ''} onClick={() => setShow(false)} className={({ isActive }) => `font-semibold text-lg  cursor-pointer text-white border-2 p-2 rounded-xl `}>Dashboard</NavLink>
                                         </div>
                                     }
                                     <div className='w-10 h-10'>
@@ -80,7 +82,7 @@ function Navbar() {
                         user ?
                             <>
                                 <h1 onClick={logoutClick} className='flex cursor-pointer ml-2 font-semibold text-lg text-white'>LogOut</h1>
-                                <NavLink onClick={toggleMenu} to={'/dashboard'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
+                                <NavLink onClick={toggleMenu} to={role=== 'normal' ? '/dashboard/biodata': ''} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
                                 <div className='w-10 h-10'>
                                     <img
                                         className='rounded-full w-full h-full'

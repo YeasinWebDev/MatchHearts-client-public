@@ -41,7 +41,7 @@ function PremiumMembers() {
                 </select>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mr-20 lg:mr-0'>
-                {sortedData?.map(member => (
+                {sortedData?.slice(0,6).map(member => (
                     <div key={member._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 lg:w-80 w-[18rem] mx-20">
                         <img src={member.profileImage} alt={`Profile of ${member.type}`} className=" lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
                         <div className=" flex flex-col  w-full">
