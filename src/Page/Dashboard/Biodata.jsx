@@ -4,12 +4,24 @@ import { AuthContext } from '../../Auth/ContextProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 function Biodata() {
   const navigate = useNavigate()
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
-  const axiosSecure= useAxiosSecure()
+  const axiosSecure = useAxiosSecure()
+
+  // get req
+  const { data: biodata = [] } = useQuery({
+    queryKey: ['dashboardBiodata', user?.email],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/dashboardBiodata`, { params: { contactEmail: user?.email } });
+      return response.data;
+    }
+  });
+
+  console.log(biodata)
 
   const divisions = [
     'Dhaka', 'Chattagram', 'Rangpur', 'Barisal',
@@ -17,10 +29,10 @@ function Biodata() {
   ];
 
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
-    
+
 
     const from = e.target
     const name = from.name.value
@@ -64,7 +76,7 @@ function Biodata() {
       contactEmail,
       mobileNumber
     }
-    
+
     const result = await axiosSecure.put('/bioDatas', data)
     toast.success('Your BioData is ready')
     navigate('/dashboard/viewBiodata')
@@ -72,7 +84,7 @@ function Biodata() {
   };
 
   return (
-    <div className=''>
+    <div>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center pt-10'>Add BioData</h2>
       <div className='w-[65%]  mx-auto  border-2 border-[#302F2A] px-10 mt-5 rounded-xl'>
         <form onSubmit={handleSubmit} className='w-full py-10'>
@@ -80,11 +92,11 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-3 items-center '>
               <label className='block font-semibold text-lg'>Name:</label>
-              <input className='border-2 rounded-md outline-none border-black p-1 w-fit' type="text" name="name" required />
+              <input className='border-2 rounded-md outline-none border-black p-1 w-fit' type="text" name="name" value={biodata?.name} required />
             </div>
             <div className='flex gap-3 items-center'>
               <label className='block font-semibold text-lg'>Biodata Type:</label>
-              <select className='border-2 p-2 rounded-lg border-black' name="biodataType" required>
+              <select className='border-2 p-2 rounded-lg border-black' name="biodataType" value={biodata?.biodataType} required>
                 <option value="">Select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -96,12 +108,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Father's Name:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="fathersName" />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="fathersName" value={biodata?.fathersName} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Mother's Name:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="mothersName" />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="mothersName" value={biodata?.mothersName} required />
             </div>
           </div>
 
@@ -122,7 +134,7 @@ function Biodata() {
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Date of Birth:</label>
-              <input className='border-2 p-2' type="date" name="dateOfBirth" required />
+              <input className='border-2 p-2' type="date" name="dateOfBirth" value={biodata?.dateOfBirth} required />
             </div>
           </div>
 
@@ -130,12 +142,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Height:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="height" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="height" value={biodata?.height} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Weight:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="weight" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="weight" value={biodata?.weight} required />
             </div>
           </div>
 
@@ -143,12 +155,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Age:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="number" name="age" />
+              <input className='border-2 p-2 rounded-lg border-black' type="number" name="age" value={biodata?.age} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Occupation:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="occupation" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="occupation" value={biodata?.occupation} required />
             </div>
           </div>
 
@@ -156,12 +168,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Race:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="race" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="race" value={biodata?.race} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Permanent Division:</label>
-              <select className='border-2 p-2 rounded-lg border-black' name="permanentDivision" required>
+              <select className='border-2 p-2 rounded-lg border-black' name="permanentDivision" value={biodata?.permanentDivision} required>
                 <option value="">Select</option>
                 {divisions.map(division => (
                   <option key={division}>{division}</option>
@@ -174,7 +186,7 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Present Division:</label>
-              <select className='border-2 p-2 rounded-lg border-black' name="presentDivision" required>
+              <select className='border-2 p-2 rounded-lg border-black' name="presentDivision" value={biodata?.presentDivision} required>
                 <option value="">Select</option>
                 {divisions.map(division => (
                   <option key={division} >{division}</option>
@@ -184,7 +196,7 @@ function Biodata() {
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Expected Partner Age:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="number" name="expectedPartnerAge" />
+              <input className='border-2 p-2 rounded-lg border-black' type="number" name="expectedPartnerAge" value={biodata?.expectedPartnerAge} required />
             </div>
           </div>
 
@@ -192,12 +204,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Expected Partner Height:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerHeight" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerHeight" value={biodata?.expectedPartnerHeight} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Expected Partner Weight:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerWeight" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerWeight" value={biodata?.expectedPartnerWeight} required />
             </div>
           </div>
 
@@ -210,11 +222,15 @@ function Biodata() {
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Mobile Number:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="tel" name="mobileNumber" required />
+              <input className='border-2 p-2 rounded-lg border-black' type="tel" name="mobileNumber" value={biodata?.mobileNumber} required />
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className='bg-[#302F2A] text-white py-2 px-3 font-semibold border-none outline-none rounded'>Save And Publish Now</button>
+          <button type="submit" disabled={loading} className='bg-[#302F2A] text-white py-2 px-3 font-semibold border-none outline-none rounded'>
+            {
+              biodata? 'Change And Save' : 'Save And Publish Now'
+            }
+          </button>
         </form>
       </div>
     </div>
