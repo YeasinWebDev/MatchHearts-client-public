@@ -48,7 +48,7 @@ function SuccessStories() {
             >
                 {
                     data.map(story => (
-                        <SwiperSlide>
+                        <SwiperSlide key={story._id}>
                             <div key={story._id} className="bg-[#FEFBF0] text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center">
                                 <img src={story.coupleImage} alt="Couple" className="w-[30vw] h-[30vh] object-cover  rounded-md mb-4" />
                                 <div className="flex items-center mb-2">
