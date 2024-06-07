@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import { AuthContext } from "../../Auth/ContextProvider";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Auth/ContextProvider";
+import {useNavigate} from 'react-router-dom'
 
-const CheckoutForm = ({bioDataId}) => {
+const CheckoutForm = ({bioDataId,email, mobile,name}) => {
   const stripe = useStripe();
   const [clientSecret, setClientSecret] = useState("");
   const elements = useElements();
-  const { user } = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
   const price = 5
   const axiosCommon = useAxiosCommon()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (price > 0) {
@@ -23,7 +25,6 @@ const CheckoutForm = ({bioDataId}) => {
         });
     }
   }, [price, axiosCommon])
-
 
 
   const handleSubmit = async (event) => {
@@ -70,21 +71,19 @@ const CheckoutForm = ({bioDataId}) => {
 
       if (paymentIntent.status === 'succeeded') {
         const payment = {
-          email: user?.email,
+          email: email,
+          mobile:mobile,
           price: price,
           transactionId: paymentIntent.id,
           date: new Date(),
           bioDataId:bioDataId,
+          name:name,
           status: "pending"
         }
 
         const res = await axiosCommon.post('/payment', payment)
-        console.log("payment i client", res)
-
-        if(res.data.insertedId){
           toast.success("$5 payment successfully")
-          Navigator('/')
-        }
+          navigate('/')
       }
     }
 

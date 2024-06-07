@@ -15,6 +15,14 @@ function BioDataDeatils() {
     const [biodataType, setBiodataType] = useState(null);
     const [biodataId, setBiodataId] = useState(null);
 
+    const {data=[]} = useQuery({
+        queryKey:['paymentId',biodataId],
+        queryFn: async () => {
+          const data = await axiosSecure.get(`/paymentById`, {params:{biodataId:biodataId}})
+          return data.data
+        }
+      })
+
     const { data: role = [] } = useQuery({
         queryKey: ['role', user?.email],
         queryFn: async () => {
@@ -129,8 +137,8 @@ function BioDataDeatils() {
                                     </>
                                     :
                                     <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
-                                        <button className='border-2 p-2 border-black rounded-xl font-semibold'>                                            
-                                               Contact Request
+                                        <button disabled={data.bioDataId === biodataId} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>                                            
+                                               {data.bioDataId === biodataId ? 'Already Requested' : 'Contact Request'}
                                         </button>
                                     </Link>
                                 }
@@ -169,3 +177,10 @@ function BioDataDeatils() {
 }
 
 export default BioDataDeatils
+
+
+// <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
+//                                         <button className='border-2 p-2 border-black rounded-xl font-semibold'>                                            
+//                                                Contact Request
+//                                         </button>
+//                                     </Link>

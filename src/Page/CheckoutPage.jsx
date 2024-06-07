@@ -4,12 +4,23 @@ import { AuthContext } from '../Auth/ContextProvider'
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from '../Components/Payment/CheckoutForm';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK)
 function CheckoutPage() {
   const { id } = useParams()
+  const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext)
+
+  const {data=[]} = useQuery({
+    queryKey: ['checkout', id],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/bioDatasbyId`, { params: { id } });
+      return response.data;
+    }
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -34,7 +45,7 @@ function CheckoutPage() {
             <h1 className=' flex items-center justify-center text-xl md:text-2xl py-6 font-bold text-[#302F2A]'>Payment</h1>
             <div className='w-[25vw]'>
               <Elements stripe={stripePromise}>
-                <CheckoutForm bioDataId={id} />
+                <CheckoutForm bioDataId={id} email={data?.contactEmail} mobile={data?.mobileNumber} name={data?.name}/>
               </Elements>
             </div>
           </div>
