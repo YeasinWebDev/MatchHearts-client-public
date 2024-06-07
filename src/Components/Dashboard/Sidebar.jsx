@@ -6,7 +6,7 @@ import { MdLogout } from "react-icons/md";
 function Sidebar() {
     const [role] = useRole()
     return (
-        <div className='z-10 md:fixed flex flex-col overflow-x-hidden bg-gray-100 w-64  px-2 py-4 absolute inset-y-0 left-0 transform'>
+        <div className='z-10 md:fixed flex flex-col overflow-x-hidden bg-[#f2f2f2] w-64  px-2 py-4 absolute inset-y-0 left-0 transform'>
 
             <div className='flex justify-center '>
                 <div className='block cursor-pointer p-4 font-bold border-2 rounded-xl'>
