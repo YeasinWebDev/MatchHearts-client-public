@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Route from './Page/Route';
+import Route from './Layouts/Route';
 import ErrorPage from './Page/ErrorPage';
 import Home from './Page/Home';
 import ContextProvider from './Auth/ContextProvider';
@@ -19,6 +19,11 @@ import BiodatasPage from './Page/BiodatasPage';
 import BioDataDeatils from './Page/BioDataDeatils';
 import PrivateRoute from './Route/PrivateRoute';
 import CheckoutPage from './Page/CheckoutPage';
+import DashboardLayout from './Layouts/DashboardLayout';
+import Biodata from './Page/Dashboard/Biodata';
+import ViewBiodata from './Page/Dashboard/ViewBiodata';
+import MyContactRequest from './Page/Dashboard/MyContactRequest';
+import Favourites_Biodata from './Page/Dashboard/Favourites_Biodata';
 
 
 
@@ -64,6 +69,30 @@ const router = createBrowserRouter([
       }
     ]
   },
+
+  {
+    path:'dashboard',
+    element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
+    children:[
+      {
+        path:'biodata',
+        element:<PrivateRoute><Biodata/></PrivateRoute>
+      },
+      {
+        path:"viewBiodata",
+        element:<PrivateRoute><ViewBiodata/></PrivateRoute>
+      },
+      {
+        path:'myContactRequest',
+        element:<PrivateRoute><MyContactRequest/></PrivateRoute>
+      },
+      {
+        path:'favouritesBiodata',
+        element:<PrivateRoute><Favourites_Biodata/></PrivateRoute>
+      }
+    ]
+
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
