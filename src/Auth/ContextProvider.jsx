@@ -2,9 +2,11 @@ import React, { createContext, useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import axios from 'axios';
 import { auth } from './firebaseConfig';
+import useAxiosCommon from '../Hooks/useAxiosCommon';
 
 export const AuthContext = createContext(null)
 function ContextProvider({ children }) {
+    const axiosCommon = useAxiosCommon()
 
     const [dark, setDark] = useState(false)
     const [user, setUser] = useState(null)
@@ -44,26 +46,30 @@ function ContextProvider({ children }) {
         const currentuser = {
             email: user?.email,
             role: "normal",
-        }
+        };
 
-        const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, currentuser)
-        return data
-    }
+        const { data } = await axiosCommon.put(`/user`, currentuser);
+        return data;
+    };
 
     // get the token from the server
     const getToken = async (email) => {
-        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email}, {withCredentials: true})
+        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email }, { withCredentials: true })
         return data
     }
 
-    
+
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+        const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 setUser(currentUser)
-                saveUser(currentUser)
-                getToken(currentUser.email)
+                try {
+                    await saveUser(currentUser);
+                    await getToken(currentUser.email);
+                } catch (error) {
+                    console.error('Error in useEffect:', error);
+                }
                 setloading(false);
             } else {
                 setUser(null);
@@ -78,7 +84,7 @@ function ContextProvider({ children }) {
 
 
 
-    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile,bioId,setBioId }
+    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile, bioId, setBioId }
     return (
         <AuthContext.Provider value={authinfo}>
             {children}

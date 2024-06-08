@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../Auth/ContextProvider';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,11 +35,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function Favourites_Biodata() {
   const axiosSecure = useAxiosSecure()
+  const { user } = React.useContext(AuthContext)
 
   const { data = [], refetch, isLoading } = useQuery({
     queryKey: ['favouritesBiodata'],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/favourites`);
+      const response = await axiosSecure.get(`/favourites`, {params:{email:user?.email}});
       return response.data;
     },
   })

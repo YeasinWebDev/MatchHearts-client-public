@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { MdDelete } from "react-icons/md";
+import { AuthContext } from '../../Auth/ContextProvider';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,11 +34,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function MyContactRequest() {
   const axiosSecure = useAxiosSecure();
+  const {user} = React.useContext(AuthContext)
 
   const { data = [], isLoading, refetch } = useQuery({
     queryKey: ['contactRequests'],
     queryFn: async () => {
-      const response = await axiosSecure.get('/payment');
+      const response = await axiosSecure.get('/payment',{params:{email:user?.email}});
       return response.data;
     },
   });

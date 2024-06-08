@@ -77,6 +77,7 @@ function BioDataDeatils() {
             return toast.error('Already Added to favorites list')
         }
         const data = {
+            user:user?.email,
             name: name,
             biodataId: id,
             address: address,

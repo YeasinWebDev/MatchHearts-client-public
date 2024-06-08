@@ -71,11 +71,10 @@ const CheckoutForm = ({bioDataId,email, mobile,name}) => {
 
       if (paymentIntent.status === 'succeeded') {
         const payment = {
+          user:user?.email,
           email: email,
           mobile:mobile,
           price: price,
-          transactionId: paymentIntent.id,
-          date: new Date(),
           bioDataId:bioDataId,
           name:name,
           status: "pending"
