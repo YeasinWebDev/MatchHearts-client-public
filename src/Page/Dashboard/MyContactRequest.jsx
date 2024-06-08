@@ -34,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function MyContactRequest() {
   const axiosSecure = useAxiosSecure();
 
-  const { data = [], isLoading , refetch } = useQuery({
+  const { data = [], isLoading, refetch } = useQuery({
     queryKey: ['contactRequests'],
     queryFn: async () => {
       const response = await axiosSecure.get('/payment');
@@ -42,7 +42,7 @@ function MyContactRequest() {
     },
   });
 
-  const handleDelete = async(id) => {
+  const handleDelete = async (id) => {
     const response = await axiosSecure.delete(`/payment/${id}`);
     refetch();
   };
@@ -60,7 +60,15 @@ function MyContactRequest() {
         </div>
       )}
 
-      {!isLoading && (
+      {
+        data.length === 0 && !isLoading && (
+          <div className='flex justify-center items-center flex-col'>
+            <h2 className='text-xl font-semibold text-[#302F2A]'>No Favourites Biodatas</h2>
+          </div>
+        )
+      }
+
+      {!isLoading && data.length > 0 && (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>

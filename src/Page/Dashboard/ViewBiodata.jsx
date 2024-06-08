@@ -71,6 +71,14 @@ function ViewBiodata() {
         </div>
       )}
 
+        {
+          data.length === 0 && !isLoading && (
+            <div className='flex justify-center items-center flex-col'>
+              <h2 className='text-xl font-semibold text-[#302F2A] pt-10'>please Add Your biodata First</h2>
+            </div>
+          )
+        }
+
       <div className='flex justify-center items-center flex-col'>
         <div className=''>
           {/* left */}

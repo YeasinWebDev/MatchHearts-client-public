@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function Favourites_Biodata() {
   const axiosSecure = useAxiosSecure()
 
-  const { data = [], refetch,isLoading } = useQuery({
+  const { data = [], refetch, isLoading } = useQuery({
     queryKey: ['favouritesBiodata'],
     queryFn: async () => {
       const response = await axiosSecure.get(`/favourites`);
@@ -52,7 +52,7 @@ function Favourites_Biodata() {
 
   return (
     <div>
-      <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>Favourites Biodatas</h2>
+      <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center pt-20'>Favourites Biodatas</h2>
       {isLoading && (
         <div className="flex w-full justify-center items-center py-10 ">
           <div className="flex justify-center items-center py-10 w-full">
@@ -61,8 +61,16 @@ function Favourites_Biodata() {
         </div>
       )}
 
-      <div className='md:mx-10'>
-        {!isLoading && <TableContainer component={Paper}>
+      {
+        data.length === 0 && !isLoading && (
+          <div className='flex justify-center items-center flex-col'>
+            <h2 className='text-xl font-semibold text-[#302F2A] pt-10'>No Favourites Biodatas</h2>
+          </div>
+        )
+      }
+
+      <div className='md:mx-10 pt-10'>
+        {!isLoading && data.length > 0 && <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>

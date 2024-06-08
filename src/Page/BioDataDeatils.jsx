@@ -77,7 +77,6 @@ function BioDataDeatils() {
 
         const result = await axiosSecure.post('/favourites', data)
         setrun(!run)
-        console.log(result.data)
         toast.success('Added to favorites list')
     }
 
