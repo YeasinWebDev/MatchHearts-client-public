@@ -6,7 +6,6 @@ import { GiBodyHeight } from "react-icons/gi";
 import { AuthContext } from '../Auth/ContextProvider';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
-import useRole from '../Hooks/useRole';
 
 
 
@@ -17,14 +16,14 @@ function BioDataDeatils() {
     const [biodataType, setBiodataType] = useState(null);
     const [run, setrun] = useState(false)
     const [biodataId, setBiodataId] = useState(null);
-    const [role] = useRole()
 
     const { data = [] } = useQuery({
         queryKey: ['paymentId', biodataId],
         queryFn: async () => {
             const data = await axiosSecure.get(`/paymentById`, { params: { biodataId: biodataId } })
             return data.data
-        }
+        },
+        enabled:!!biodataId
     })
 
     const { data: Biodata = [], isSuccess: biodataSuccess } = useQuery({
@@ -35,13 +34,22 @@ function BioDataDeatils() {
         },
     });
 
+    const { data: BiodatabyEmail = [] } = useQuery({
+        queryKey: ['biodataByEmail', user],
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/bioDatasbyEmail`, { params: { contactEmail: user?.email } })
+            return response.data
+        },
+    });
+
+
     useEffect(() => {
         if (biodataSuccess && Biodata.biodata_id) {
             setBiodataType(Biodata.biodataType);
             setBiodataId(Biodata.biodata_id)
             window.scrollTo(0, 0);
         }
-    }, [biodataSuccess, Biodata.biodataType,id]);
+    }, [biodataSuccess, Biodata.biodataType, id]);
 
     const { data: relatedData = [] } = useQuery({
         queryKey: ['relatedBiodata', biodataType],
@@ -153,18 +161,20 @@ function BioDataDeatils() {
 
                         <div className='py-10 flex gap-4 justify-between flex-wrap px-10'>
                             <div className='flex justify-center flex-col'>
-                                <h2 className='font-semibold text-xl py-3'>Request to see Contact</h2>
-                                {role.role === 'premium' ?
+                                {BiodatabyEmail.premium === 'true' ?
                                     <>
                                         <h1 className='font-semibold text-2xl'>Contact Email: <span className='pl-2 text-orange-600'>{Biodata?.contactEmail}</span></h1>
                                         <h1 className='font-semibold text-2xl'>Mobile Number: <span className='pl-2 text-orange-600'>{Biodata?.mobileNumber}</span></h1>
                                     </>
                                     :
-                                    <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
-                                        <button disabled={data.bioDataId === biodataId} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>
-                                            {data.bioDataId === biodataId ? 'Already Requested' : 'Contact Request'}
-                                        </button>
-                                    </Link>
+                                    <>
+                                        <h2 className='font-semibold text-xl py-3'>Request to see Contact</h2>
+                                        <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
+                                            <button disabled={data.bioDataId === biodataId} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>
+                                                {data.bioDataId === biodataId ? 'Already Requested' : 'Contact Request'}
+                                            </button>
+                                        </Link>
+                                    </>
                                 }
                             </div>
                             <button onClick={() => handelFavourites(Biodata?.name, Biodata?.biodata_id, Biodata?.permanentDivision, Biodata?.occupation)} className='border-2 border-black p-3 rounded-xl'><img className='w-10' src="https://i.ibb.co/843G0Vw/wishlist.png" alt="" /></button>
