@@ -24,6 +24,10 @@ import Biodata from './Page/Dashboard/Biodata';
 import ViewBiodata from './Page/Dashboard/ViewBiodata';
 import MyContactRequest from './Page/Dashboard/MyContactRequest';
 import Favourites_Biodata from './Page/Dashboard/Favourites_Biodata';
+import AdminDashboard from './Page/Dashboard/Admin/AdminDashboard';
+import ManageUsers from './Page/Dashboard/Admin/ManageUsers';
+import ApprovedPremium from './Page/Dashboard/Admin/ApprovedPremium';
+import ApprovedContactRequest from './Page/Dashboard/Admin/ApprovedContactRequest';
 
 
 
@@ -89,6 +93,22 @@ const router = createBrowserRouter([
       {
         path:'favouritesBiodata',
         element:<PrivateRoute><Favourites_Biodata/></PrivateRoute>
+      },
+      {
+        path:'adminDashboard',
+        element:<PrivateRoute><AdminDashboard/></PrivateRoute>
+      },
+      {
+        path:'manageUsers',
+        element:<PrivateRoute><ManageUsers/></PrivateRoute>
+      },
+      {
+        path:'approvedPremium',
+        element:<PrivateRoute><ApprovedPremium/></PrivateRoute>
+      },
+      {
+        path:'approvedContactRequest',
+        element:<PrivateRoute><ApprovedContactRequest/></PrivateRoute>
       }
     ]
 

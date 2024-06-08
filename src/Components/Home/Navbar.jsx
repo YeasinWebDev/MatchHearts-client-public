@@ -49,7 +49,7 @@ function Navbar() {
                                         show &&
                                         <div className='flex flex-col absolute bg-[#302F2A] top-[80%] right-8 gap-2  z-50 p-5 rounded-xl border-2 border-white'>
                                             <h1 onClick={logoutClick} className='flex cursor-pointer items-center justify-center font-semibold text-lg text-white border-2 p-2 rounded-xl '>LogOut</h1>
-                                            <Link to={role=== 'normal' ? '/dashboard/biodata': '/'} onClick={() => setShow(false)} className={ `font-semibold text-lg  cursor-pointer text-white border-2 p-2 rounded-xl `}>Dashboard</Link>
+                                            <Link to={role=== 'normal' ? '/dashboard/biodata': '/dashboard/adminDashboard'} onClick={() => setShow(false)} className={ `font-semibold text-lg  cursor-pointer text-white border-2 p-2 rounded-xl `}>Dashboard</Link>
                                         </div>
                                     }
                                     <div className='w-10 h-10'>
@@ -82,7 +82,7 @@ function Navbar() {
                         user ?
                             <>
                                 <h1 onClick={logoutClick} className='flex cursor-pointer ml-2 font-semibold text-lg text-white'>LogOut</h1>
-                                <NavLink onClick={toggleMenu} to={role=== 'normal' ? '/dashboard/biodata': ''} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
+                                <NavLink onClick={toggleMenu} to={role=== 'normal' ? '/dashboard/biodata': '/dashboard/adminDashboard'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Dashboard</NavLink>
                                 <div className='w-10 h-10'>
                                     <img
                                         className='rounded-full w-full h-full'
