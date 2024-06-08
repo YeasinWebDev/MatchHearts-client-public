@@ -5,6 +5,8 @@ import useAxiosCommon from '../Hooks/useAxiosCommon'
 import { GiBodyHeight } from "react-icons/gi";
 import { AuthContext } from '../Auth/ContextProvider';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
+import useRole from '../Hooks/useRole';
 
 
 
@@ -13,24 +15,17 @@ function BioDataDeatils() {
     const axiosSecure = useAxiosSecure()
     const { user } = useContext(AuthContext)
     const [biodataType, setBiodataType] = useState(null);
+    const [run, setrun] = useState(false)
     const [biodataId, setBiodataId] = useState(null);
+    const [role] = useRole()
 
-    const {data=[]} = useQuery({
-        queryKey:['paymentId',biodataId],
+    const { data = [] } = useQuery({
+        queryKey: ['paymentId', biodataId],
         queryFn: async () => {
-          const data = await axiosSecure.get(`/paymentById`, {params:{biodataId:biodataId}})
-          return data.data
+            const data = await axiosSecure.get(`/paymentById`, { params: { biodataId: biodataId } })
+            return data.data
         }
-      })
-
-    const { data: role = [] } = useQuery({
-        queryKey: ['role', user?.email],
-        queryFn: async () => {
-            const response = await axiosSecure.get(`/user`, { params: { email: user.email } });
-            return response.data;
-        }
-    });
-
+    })
 
     const { data: Biodata = [], isSuccess: biodataSuccess } = useQuery({
         queryKey: ['biodata', id],
@@ -41,14 +36,14 @@ function BioDataDeatils() {
     });
 
     useEffect(() => {
-        if (biodataSuccess) {
+        if (biodataSuccess && Biodata.biodata_id) {
             setBiodataType(Biodata.biodataType);
             setBiodataId(Biodata.biodata_id)
+            window.scrollTo(0, 0);
         }
-        window.scrollTo(0, 0);
-    }, [biodataSuccess, Biodata.biodataType]);
+    }, [biodataSuccess, Biodata.biodataType,id]);
 
-    const { data: relatedData = [], } = useQuery({
+    const { data: relatedData = [] } = useQuery({
         queryKey: ['relatedBiodata', biodataType],
         queryFn: async () => {
             const response = await axiosSecure.get(`/relatedData`, { params: { biodataType: biodataType } });
@@ -57,7 +52,35 @@ function BioDataDeatils() {
         enabled: !!biodataType,
     });
 
-    const filterData = relatedData.filter(a => a.biodata_id !== biodataId)
+    const filterData = relatedData?.filter(a => a.biodata_id !== biodataId)
+
+    const { data: favoriteData } = useQuery({
+        queryKey: ['favouritesData', biodataId, run],
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/favouritesbyId`, { params: { id: biodataId } });
+            return response.data;
+        },
+        enabled: !!biodataType,
+    });
+
+    // Favourites 
+    const handelFavourites = async (name, id, address, occupation) => {
+        if (favoriteData?.biodataId === biodataId) {
+            return toast.error('Already Added to favorites list')
+        }
+        const data = {
+            name: name,
+            biodataId: id,
+            address: address,
+            occupation: occupation
+        }
+
+        const result = await axiosSecure.post('/favourites', data)
+        setrun(!run)
+        console.log(result.data)
+        toast.success('Added to favorites list')
+    }
+
 
     return (
         <div>
@@ -75,37 +98,38 @@ function BioDataDeatils() {
                     <div className=''>
                         <div className='flex justify-center items-center gap-2 pt-5'>
                             <h1 className='md:text-4xl text-xl font-semibold'>{Biodata?.name}</h1>
-                            <h1 className='text-orange-600 font-semibold mt-3'>({Biodata.biodataType})</h1>
+                            <h1 className='text-green-600 font-semibold mt-3'>({Biodata.biodataType})</h1>
                         </div>
-                        <h1 className='font-semibold flex justify-center'>Birth: <span className='pl-3 text-orange-600'>{Biodata?.dateOfBirth}</span></h1>
+                        <h1 className='font-semibold flex justify-center'>Birth: <span className='pl-3 text-green-600'>{Biodata?.dateOfBirth}</span></h1>
+                        <h1 className='font-semibold flex justify-center'>Biodata Id: <span className='pl-3 text-green-600 pb-4'>"{Biodata?.biodata_id}"</span></h1>
 
                         <div className="flex justify-center items-center gap-10 flex-wrap py-5">
                             <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                 <GiBodyHeight size={30} />
-                                <h3 className="text-4xl font-bold text-orange-400">{Biodata.height}</h3>
+                                <h3 className="text-4xl font-bold text-green-400">{Biodata.height}</h3>
                             </div>
                             <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                 <img className='w-10' src="https://i.ibb.co/0r0hvsg/age-icon.png" alt="" />
-                                <h3 className="text-4xl font-bold text-orange-400">{Biodata?.age}</h3>
+                                <h3 className="text-4xl font-bold text-green-400">{Biodata?.age}</h3>
                             </div>
                             <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                 <img className='w-10' src="https://i.ibb.co/yPjcN8J/weight.png" alt="" />
-                                <h3 className="text-4xl font-bold text-orange-400">{Biodata?.weight}</h3>
+                                <h3 className="text-4xl font-bold text-green-400">{Biodata?.weight}</h3>
                             </div>
                             <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                 <img className='w-10' src="https://i.ibb.co/PNmW5BC/briefcase.png" alt="" />
-                                <h3 className="text-4xl font-bold text-orange-400">{Biodata?.occupation}</h3>
+                                <h3 className="text-4xl font-bold text-green-400">{Biodata?.occupation}</h3>
                             </div>
                         </div>
 
                         <div className='flex items-center justify-between flex-wrap py-10 border-b-2 px-5 md:px-0'>
                             <div>
-                                <h1 className='font-semibold text-2xl'>Permanent Division: <span className='pl-2 text-orange-600'>{Biodata?.permanentDivision}</span></h1>
-                                <h1 className='font-semibold text-2xl'>Present Division: <span className='pl-2 text-orange-600'>{Biodata?.presentDivision}</span></h1>
+                                <h1 className='font-semibold text-2xl'>Permanent Division: <span className='pl-2 text-green-600'>{Biodata?.permanentDivision}</span></h1>
+                                <h1 className='font-semibold text-2xl'>Present Division: <span className='pl-2 text-green-600'>{Biodata?.presentDivision}</span></h1>
                             </div>
                             <div>
-                                <h1 className='font-semibold text-2xl'>Father Name: <span className='pl-2 text-orange-600'>{Biodata?.fathersName}</span></h1>
-                                <h1 className='font-semibold text-2xl'>Mother Name: <span className='pl-2 text-orange-600'>{Biodata?.mothersName}</span></h1>
+                                <h1 className='font-semibold text-2xl'>Father Name: <span className='pl-2 text-green-600'>{Biodata?.fathersName}</span></h1>
+                                <h1 className='font-semibold text-2xl'>Mother Name: <span className='pl-2 text-green-600'>{Biodata?.mothersName}</span></h1>
                             </div>
                         </div>
 
@@ -115,21 +139,22 @@ function BioDataDeatils() {
                             <div className='flex justify-center items-center gap-10 flex-wrap py-5'>
                                 <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                     <GiBodyHeight size={30} />
-                                    <h3 className="text-4xl font-bold text-orange-400">{Biodata?.expectedPartnerHeight}</h3>
+                                    <h3 className="text-4xl font-bold text-green-400">{Biodata?.expectedPartnerHeight}</h3>
                                 </div>
                                 <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                     <img className='w-10' src="https://i.ibb.co/0r0hvsg/age-icon.png" alt="" />
-                                    <h3 className="text-4xl font-bold text-orange-400">{Biodata?.expectedPartnerAge}</h3>
+                                    <h3 className="text-4xl font-bold text-green-400">{Biodata?.expectedPartnerAge}</h3>
                                 </div>
                                 <div className="bg-white text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center gap-2">
                                     <img className='w-10' src="https://i.ibb.co/yPjcN8J/weight.png" alt="" />
-                                    <h3 className="text-4xl font-bold text-orange-400">{Biodata?.expectedPartnerWeight}</h3>
+                                    <h3 className="text-4xl font-bold text-green-400">{Biodata?.expectedPartnerWeight}</h3>
                                 </div>
                             </div>
                         </div>
 
                         <div className='py-10 flex gap-4 justify-between flex-wrap px-10'>
                             <div className='flex justify-center flex-col'>
+                                <h2 className='font-semibold text-xl py-3'>Request to see Contact</h2>
                                 {role.role === 'premium' ?
                                     <>
                                         <h1 className='font-semibold text-2xl'>Contact Email: <span className='pl-2 text-orange-600'>{Biodata?.contactEmail}</span></h1>
@@ -137,13 +162,13 @@ function BioDataDeatils() {
                                     </>
                                     :
                                     <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
-                                        <button disabled={data.bioDataId === biodataId} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>                                            
-                                               {data.bioDataId === biodataId ? 'Already Requested' : 'Contact Request'}
+                                        <button disabled={data.bioDataId === biodataId} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>
+                                            {data.bioDataId === biodataId ? 'Already Requested' : 'Contact Request'}
                                         </button>
                                     </Link>
                                 }
                             </div>
-                            <button className='border-2 border-black p-3 rounded-xl'><img className='w-10' src="https://i.ibb.co/843G0Vw/wishlist.png" alt="" /></button>
+                            <button onClick={() => handelFavourites(Biodata?.name, Biodata?.biodata_id, Biodata?.permanentDivision, Biodata?.occupation)} className='border-2 border-black p-3 rounded-xl'><img className='w-10' src="https://i.ibb.co/843G0Vw/wishlist.png" alt="" /></button>
                         </div>
                     </div>
                 </div>
@@ -177,10 +202,3 @@ function BioDataDeatils() {
 }
 
 export default BioDataDeatils
-
-
-// <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
-//                                         <button className='border-2 p-2 border-black rounded-xl font-semibold'>                                            
-//                                                Contact Request
-//                                         </button>
-//                                     </Link>

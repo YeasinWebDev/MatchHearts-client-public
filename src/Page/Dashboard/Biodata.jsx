@@ -21,6 +21,8 @@ function Biodata() {
     }
   });
 
+  const data = biodata.bioData
+
 
   const divisions = [
     'Dhaka', 'Chattagram', 'Rangpur', 'Barisal',
@@ -91,11 +93,11 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-3 items-center '>
               <label className='block font-semibold text-lg'>Name:</label>
-              <input className='border-2 rounded-md outline-none border-black p-1 w-fit' type="text" name="name" defaultValue={biodata?.name} required />
+              <input className='border-2 rounded-md outline-none border-black p-1 w-fit' type="text" name="name" defaultValue={data?.name} required />
             </div>
             <div className='flex gap-3 items-center'>
               <label className='block font-semibold text-lg'>Biodata Type:</label>
-              <select className='border-2 p-2 rounded-lg border-black' name="biodataType" defaultValue={biodata?.biodataType} required>
+              <select className='border-2 p-2 rounded-lg border-black' name="biodataType" defaultValue={data?.biodataType} required>
                 <option value="">Select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -107,12 +109,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Father's Name:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="fathersName" defaultValue={biodata?.fathersName} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="fathersName" defaultValue={data?.fathersName} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Mother's Name:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="mothersName" defaultValue={biodata?.mothersName} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="mothersName" defaultValue={data?.mothersName} required />
             </div>
           </div>
 
@@ -133,7 +135,7 @@ function Biodata() {
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Date of Birth:</label>
-              <input className='border-2 p-2' type="date" name="dateOfBirth" defaultValue={biodata?.dateOfBirth} required />
+              <input className='border-2 p-2' type="date" name="dateOfBirth" defaultValue={data?.dateOfBirth} required />
             </div>
           </div>
 
@@ -141,12 +143,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Height:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="height" defaultValue={biodata?.height} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="height" defaultValue={data?.height} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Weight:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="weight" defaultValue={biodata?.weight} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="weight" defaultValue={data?.weight} required />
             </div>
           </div>
 
@@ -154,12 +156,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Age:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="number" name="age" defaultValue={biodata?.age} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="number" name="age" defaultValue={data?.age} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Occupation:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="occupation" defaultValue={biodata?.occupation} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="occupation" defaultValue={data?.occupation} required />
             </div>
           </div>
 
@@ -167,13 +169,13 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Race:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="race" defaultValue={biodata?.race} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="race" defaultValue={data?.race} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Permanent Division:</label>
-              <select className='border-2 p-2 rounded-lg border-black' name="permanentDivision" defaultValue={biodata?.permanentDivision} required>
-                <option value="">Select</option>
+              <select className='border-2 p-2 rounded-lg border-black' name="permanentDivision" defaultValue={data?.permanentDivision} required>
+                <option defaultValue={data?.permanentDivision}>Select</option>
                 {divisions.map(division => (
                   <option key={division}>{division}</option>
                 ))}
@@ -185,7 +187,7 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Present Division:</label>
-              <select className='border-2 p-2 rounded-lg border-black' name="presentDivision" defaultValue={biodata?.presentDivision} required>
+              <select className='border-2 p-2 rounded-lg border-black' name="presentDivision" defaultValue={data?.presentDivision} required>
                 <option>Select</option>
                 {divisions.map(division => (
                   <option key={division} >{division}</option>
@@ -195,7 +197,7 @@ function Biodata() {
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Expected Partner Age:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="number" name="expectedPartnerAge" defaultValue={biodata?.expectedPartnerAge} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="number" name="expectedPartnerAge" defaultValue={data?.expectedPartnerAge} required />
             </div>
           </div>
 
@@ -203,12 +205,12 @@ function Biodata() {
           <div className='flex items-center justify-between pb-5 flex-wrap gap-3'>
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Expected Partner Height:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerHeight" defaultValue={biodata?.expectedPartnerHeight} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerHeight" defaultValue={data?.expectedPartnerHeight} required />
             </div>
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Expected Partner Weight:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerWeight" defaultValue={biodata?.expectedPartnerWeight} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="text" name="expectedPartnerWeight" defaultValue={data?.expectedPartnerWeight} required />
             </div>
           </div>
 
@@ -221,7 +223,7 @@ function Biodata() {
 
             <div className='flex gap-2 items-center'>
               <label className='block font-semibold text-lg'>Mobile Number:</label>
-              <input className='border-2 p-2 rounded-lg border-black' type="tel" name="mobileNumber" defaultValue={biodata?.mobileNumber} required />
+              <input className='border-2 p-2 rounded-lg border-black' type="tel" name="mobileNumber" defaultValue={data?.mobileNumber} required />
             </div>
           </div>
 
