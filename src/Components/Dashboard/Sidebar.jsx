@@ -26,22 +26,8 @@ function Sidebar() {
             <div className='mt-14'>
                 <div className='px-3 flex flex-col'>
                     {
-                        role === 'normal' ?
-                            <>
-                                <NavLink to="/dashboard/biodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
-                                    Biodata
-                                </NavLink>
-                                <NavLink to="/dashboard/viewBiodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
-                                    View Biodata
-                                </NavLink>
-                                <NavLink to="/dashboard/myContactRequest" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
-                                    My Contact Request
-                                </NavLink>
-                                <NavLink to="/dashboard/favouritesBiodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
-                                    Favourites Biodata
-                                </NavLink>
-                            </>
-                            :
+                        role === 'admin' ?
+
                             <>
                                 <NavLink to="/dashboard/adminDashboard" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
                                     Admin Dashboard
@@ -56,6 +42,22 @@ function Sidebar() {
                                     Approved Contact Request
                                 </NavLink>
                             </>
+                            :
+                            <>
+                                <NavLink to="/dashboard/biodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
+                                    Biodata
+                                </NavLink>
+                                <NavLink to="/dashboard/viewBiodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
+                                    View Biodata
+                                </NavLink>
+                                <NavLink to="/dashboard/myContactRequest" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
+                                    My Contact Request
+                                </NavLink>
+                                <NavLink to="/dashboard/favouritesBiodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
+                                    Favourites Biodata
+                                </NavLink>
+                            </>
+                            
                     }
                 </div>
 

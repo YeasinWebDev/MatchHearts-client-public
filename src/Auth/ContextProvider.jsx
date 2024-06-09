@@ -45,6 +45,7 @@ function ContextProvider({ children }) {
     const saveUser = async user => {
         const currentuser = {
             email: user?.email,
+            name: user?.displayName,
             role: "normal",
         };
 
@@ -53,23 +54,20 @@ function ContextProvider({ children }) {
     };
 
     // get the token from the server
-    const getToken = async (email) => {
-        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email }, { withCredentials: true })
-        return data
+    const getToken = (email) => {
+        console.log(email)
+        const data = axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email }, { withCredentials: true })
     }
 
 
 
+
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 setUser(currentUser)
-                try {
-                    await saveUser(currentUser);
-                    await getToken(currentUser.email);
-                } catch (error) {
-                    console.error('Error in useEffect:', error);
-                }
+                saveUser(currentUser);
+                getToken(currentUser.email);
                 setloading(false);
             } else {
                 setUser(null);
