@@ -7,10 +7,10 @@ import toast from 'react-hot-toast';
 
 function Sidebar() {
     const [role] = useRole()
-    const {user,LogOut} = useContext(AuthContext)
+    const { user, LogOut } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const handelLogout = () =>{
+    const handelLogout = () => {
         LogOut()
         navigate('/')
         toast.success("LogOut successfully")
@@ -51,6 +51,9 @@ function Sidebar() {
                                 <NavLink to="/dashboard/approvedContactRequest" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
                                     Approved Contact Request
                                 </NavLink>
+                                <NavLink to="/dashboard/successStory" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
+                                    Success Story
+                                </NavLink>
                             </>
                             :
                             <>
@@ -66,8 +69,11 @@ function Sidebar() {
                                 <NavLink to="/dashboard/favouritesBiodata" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
                                     Favourites Biodata
                                 </NavLink>
+                                <NavLink to="/dashboard/married" className={({ isActive }) => `border-2 px-5 py-2 mb-4 font-semibold text-lg rounded-xl ${isActive ? 'bg-[#C4BA8F]' : ''}`}>
+                                    Married
+                                </NavLink>
                             </>
-                            
+
                     }
                 </div>
 
