@@ -17,16 +17,16 @@ function BioDataDeatils() {
     const [run, setrun] = useState(false)
     const [biodataId, setBiodataId] = useState(null);
 
-    const { data = [] } = useQuery({
+    const { data = [], isLoading } = useQuery({
         queryKey: ['paymentId', biodataId],
         queryFn: async () => {
-            const data = await axiosSecure.get(`/paymentById`, { params: { biodataId: biodataId } })
+            const data = await axiosSecure.get(`/paymentById`, { params: { biodataId: biodataId, email: user?.email } })
             return data.data
         },
-        enabled:!!biodataId
+        enabled: !!biodataId
     })
 
-    const { data: Biodata = [], isSuccess: biodataSuccess } = useQuery({
+    const { data: Biodata = [], isSuccess: biodataSuccess, isLoading: isloading2 } = useQuery({
         queryKey: ['biodata', id],
         queryFn: async () => {
             const response = await axiosSecure.get(`/bioDatas/${id}`)
@@ -34,8 +34,8 @@ function BioDataDeatils() {
         },
     });
 
-    const { data: BiodatabyEmail = [] } = useQuery({
-        queryKey: ['biodataByEmail', user],
+    const { data: BiodatabyEmail = [], isLoading: isloading3 } = useQuery({
+        queryKey: ['biodataByEmail', user?.email],
         queryFn: async () => {
             const response = await axiosSecure.get(`/bioDatasbyEmail`, { params: { contactEmail: user?.email } })
             return response.data
@@ -51,7 +51,7 @@ function BioDataDeatils() {
         }
     }, [biodataSuccess, Biodata.biodataType, id]);
 
-    const { data: relatedData = [] } = useQuery({
+    const { data: relatedData = [], isLoading: isloading4 } = useQuery({
         queryKey: ['relatedBiodata', biodataType],
         queryFn: async () => {
             const response = await axiosSecure.get(`/relatedData`, { params: { biodataType: biodataType } });
@@ -62,10 +62,10 @@ function BioDataDeatils() {
 
     const filterData = relatedData?.filter(a => a.biodata_id !== biodataId)
 
-    const { data: favoriteData } = useQuery({
+    const { data: favoriteData, isLoading: isloading5 } = useQuery({
         queryKey: ['favouritesData', biodataId, run],
         queryFn: async () => {
-            const response = await axiosSecure.get(`/favouritesbyId`, { params: { id: biodataId } });
+            const response = await axiosSecure.get(`/favouritesbyId`, { params: { id: biodataId?.toString() } });
             return response.data;
         },
         enabled: !!biodataType,
@@ -73,13 +73,13 @@ function BioDataDeatils() {
 
     // Favourites 
     const handelFavourites = async (name, id, address, occupation) => {
-        if (favoriteData?.biodataId === biodataId) {
+        if (favoriteData?.biodataId === biodataId?.toString()) {
             return toast.error('Already Added to favorites list')
         }
         const data = {
-            user:user?.email,
+            user: user?.email,
             name: name,
-            biodataId: id,
+            biodataId: id?.toString(),
             address: address,
             occupation: occupation
         }
@@ -89,6 +89,15 @@ function BioDataDeatils() {
         toast.success('Added to favorites list')
     }
 
+    if (isLoading || isloading2 || isloading3 || isloading4 || isloading5) {
+        return (
+            <div className="flex justify-center items-center py-10">
+                <div className="flex justify-center items-center py-10">
+                    <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-black"></div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -171,8 +180,8 @@ function BioDataDeatils() {
                                     <>
                                         <h2 className='font-semibold text-xl py-3'>Request to see Contact</h2>
                                         <Link to={`/checkoutPage/${Biodata?.biodata_id}`}>
-                                            <button disabled={data.bioDataId === biodataId} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>
-                                                {data.bioDataId === biodataId ? 'Already Requested' : 'Contact Request'}
+                                            <button disabled={data.bioDataId === biodataId?.toString()} className='border-2 p-2 cursor-pointer border-black rounded-xl font-semibold'>
+                                                {data.bioDataId === biodataId?.toString() ? 'Already Requested' : 'Contact Request'}
                                             </button>
                                         </Link>
                                     </>

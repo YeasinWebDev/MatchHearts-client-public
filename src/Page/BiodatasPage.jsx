@@ -31,7 +31,7 @@ function BiodatasPage() {
     { value: 'Sylhet', label: 'Sylhet' },
   ];
 
-  const { data = [] } = useQuery({
+  const { data = [], isLoading } = useQuery({
     queryKey: ['premiumbiodatas'],
     queryFn: async () => {
       const data = await axiosCommon.get('/bioDatas');
@@ -66,6 +66,16 @@ function BiodatasPage() {
       selectedOption.length === 0 || selectedOption.some((option) => option.value === biodata.permanentDivision);
     return ageMatch && genderMatch && divisionMatch;
   });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-10">
+        <div className="flex justify-center items-center py-10">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-black"></div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className='w-full min-h-screen bg-[#FEFBF0] py-5'>
