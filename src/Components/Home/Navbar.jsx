@@ -9,7 +9,6 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false);
     const [role] = useRole()
-    console.log(role)
     const logoutClick = () => {
         <Navigator to='/' />
         toast.success('Logged Out Successfully')

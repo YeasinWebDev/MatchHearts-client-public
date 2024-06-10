@@ -28,6 +28,8 @@ import AdminDashboard from './Page/Dashboard/Admin/AdminDashboard';
 import ManageUsers from './Page/Dashboard/Admin/ManageUsers';
 import ApprovedPremium from './Page/Dashboard/Admin/ApprovedPremium';
 import ApprovedContactRequest from './Page/Dashboard/Admin/ApprovedContactRequest';
+import SuccessStory from './Page/Dashboard/Admin/SuccessStory';
+import Married from './Page/Dashboard/Married';
 
 
 
@@ -70,7 +72,8 @@ const router = createBrowserRouter([
       {
         path:"/checkoutPage/:id",
         element:<PrivateRoute><CheckoutPage/></PrivateRoute>
-      }
+      },
+      
     ]
   },
 
@@ -109,6 +112,14 @@ const router = createBrowserRouter([
       {
         path:'approvedContactRequest',
         element:<PrivateRoute><ApprovedContactRequest/></PrivateRoute>
+      },
+      {
+        path:'successStory',
+        element:<PrivateRoute><SuccessStory/></PrivateRoute>
+      },
+      {
+        path:'married',
+        element:<PrivateRoute><Married/></PrivateRoute>
       }
     ]
 

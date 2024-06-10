@@ -8,14 +8,13 @@ import { AuthContext } from '../Auth/ContextProvider';
 import { imageUpload } from '../Api';
 function Signup() {
     const navigate = useNavigate()
-    const [see, setSee] = useState(false)
-    const {
-        register,
-        // handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm()
-    const { logInByGoogle, createUser, setUser, user, dark, loading, setloading, updateUserProfile } = useContext(AuthContext)
+    // const {
+    //     register,
+    //     // handleSubmit,
+    //     reset,
+    //     formState: { errors },
+    // } = useForm()
+    const { logInByGoogle, createUser, setUser, user, loading, updateUserProfile, saveUser } = useContext(AuthContext)
     useContext(AuthContext)
     if (user) {
         return navigate('/')
@@ -32,6 +31,7 @@ function Signup() {
             // img upload 
             const image_url = await imageUpload(image)
 
+
             // create user 
             const result = await createUser(email, password)
 
@@ -42,6 +42,8 @@ function Signup() {
                 displayName: name,
                 photoURL: image_url,
             }));
+            await saveUser({ email, name })
+
             navigate('/')
             toast.success('Signup Successful')
         } catch (error) {
@@ -49,7 +51,6 @@ function Signup() {
             toast.error(error.message)
         }
 
-        // reset();
     }
 
 
@@ -58,6 +59,7 @@ function Signup() {
             .then(e => {
                 navigate('/')
                 toast.success('signUp succesfull')
+                saveUser({ email: e.user?.email, name: e?.user?.displayName })
             })
             .catch(e => toast.error(e.message))
     }

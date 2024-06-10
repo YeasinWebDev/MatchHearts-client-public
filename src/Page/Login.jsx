@@ -13,6 +13,7 @@ export default function Login() {
     const [see, setSee] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
+    const {saveUser} = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -40,6 +41,7 @@ export default function Login() {
             .then(e => {
                 navigate(location.state || '/')
                 toast.success("Login successful")
+                saveUser({ email: e.user?.email, name: e?.user?.displayName })
             })
             .catch(e => toast.error(e.message))
     }

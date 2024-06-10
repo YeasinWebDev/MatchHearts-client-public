@@ -45,7 +45,7 @@ function ContextProvider({ children }) {
     const saveUser = async user => {
         const currentuser = {
             email: user?.email,
-            name: user?.displayName,
+            name: user?.name || user?.displayName,
             role: "normal",
         };
 
@@ -55,19 +55,18 @@ function ContextProvider({ children }) {
 
     // get the token from the server
     const getToken = (email) => {
-        console.log(email)
         const data = axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email }, { withCredentials: true })
+        return data
     }
 
 
 
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 setUser(currentUser)
-                saveUser(currentUser);
-                getToken(currentUser.email);
+                await getToken(currentUser.email);
                 setloading(false);
             } else {
                 setUser(null);
@@ -82,7 +81,7 @@ function ContextProvider({ children }) {
 
 
 
-    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile, bioId, setBioId }
+    const authinfo = { user, setUser, createUser, signIn, LogOut, logInByGoogle, loading, setloading, dark, setDark, disable, setDisable, updateUserProfile, bioId, setBioId, saveUser }
     return (
         <AuthContext.Provider value={authinfo}>
             {children}
