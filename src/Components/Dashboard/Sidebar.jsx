@@ -1,10 +1,20 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import useRole from '../../Hooks/useRole'
 import { MdLogout } from "react-icons/md";
+import { AuthContext } from '../../Auth/ContextProvider';
+import toast from 'react-hot-toast';
 
 function Sidebar() {
     const [role] = useRole()
+    const {user,LogOut} = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handelLogout = () =>{
+        LogOut()
+        navigate('/')
+        toast.success("LogOut successfully")
+    }
     return (
         <div className='z-10 md:fixed flex flex-col overflow-x-hidden bg-[#f2f2f2] w-64  px-2 py-4 absolute inset-y-0 left-0 transform'>
 
@@ -63,7 +73,7 @@ function Sidebar() {
 
             </div>
 
-            <button className='py-3 bg-[#302F2A] mt-5 text-white flex items-center justify-center font-semibold rounded-lg'>LogOut <span className='pl-3'><MdLogout /></span></button>
+            <button onClick={handelLogout} className='py-3 bg-[#302F2A] mt-5 text-white flex items-center justify-center font-semibold rounded-lg'>LogOut <span className='pl-3'><MdLogout /></span></button>
         </div>
     )
 }
