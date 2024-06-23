@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { MdDelete } from "react-icons/md";
 import { AuthContext } from '../../Auth/ContextProvider';
+import { Helmet } from 'react-helmet';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,6 +53,9 @@ function MyContactRequest() {
 
   return (
     <div className='pt-10 md:px-10 px-0'>
+      <Helmet>
+        <title>MatchHearts || Contact Request</title>
+      </Helmet>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>My Contact Request</h2>
 
       {isLoading && (

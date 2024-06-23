@@ -14,6 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { Helmet } from 'react-helmet';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -54,7 +55,7 @@ function SuccessStory() {
         setOpen(true)
 
         const response = axiosSecure.get(`/successStoriesById/${id}`)
-        .then((res) => setStory(res.data) )
+            .then((res) => setStory(res.data))
 
     };
     const handleClose = () => setOpen(false);
@@ -74,6 +75,9 @@ function SuccessStory() {
 
     return (
         <div>
+            <Helmet>
+                <title>MatchHearts || Success Story</title>
+            </Helmet>
             <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>Success Story</h2>
 
             <div className='md:mx-20 mx-0'>

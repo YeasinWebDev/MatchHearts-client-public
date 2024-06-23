@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -51,6 +52,9 @@ function ApprovedPremium() {
 
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Approved Premium</title>
+      </Helmet>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>Approved Premium</h2>
 
       <div className='md:mx-20 mx-0'>

@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import toast from 'react-hot-toast';
 import { data } from 'autoprefixer';
+import { Helmet } from 'react-helmet';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -75,6 +76,9 @@ function ManageUsers() {
 
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Manage Users</title>
+      </Helmet>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>Manage Users</h2>
 
 
@@ -84,7 +88,7 @@ function ManageUsers() {
             <h1 className='text-2xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>No user Found</h1>
           </>
           :
-          <div className='md:mx-20 mx-0'>
+          <div className='xl:mx-20 lg:mx-5 mx-0'>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>

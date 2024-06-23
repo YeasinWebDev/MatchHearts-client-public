@@ -190,14 +190,14 @@ function BiodatasPage() {
         <div className='w-full md:w-[100%] xl:w-[80%]'>
           <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
             {filteredBiodatas.map((biodata) => (
-              <div key={biodata._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6">
+              <div key={biodata._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 relative">
                 <img src={biodata.profileImage} alt={`Profile of ${biodata.name}`} className="lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
                 <div className="flex flex-col w-full">
-                  <h3 className="text-xl font-semibold">Biodata Id: {biodata.biodata_id}</h3>
+                  <h3 className="text-xl font-semibold absolute bg-[#302F2A] rounded-full w-10 h-10 flex items-center justify-center text-white top-2">{biodata.biodata_id}</h3>
                   <h3 className="text-xl font-semibold flex gap-2 ">Biodata Type: <span className='text-orange-400 font-semibold'>{biodata.biodataType}</span></h3>
                   <p className="text-black text-xl"><span className='font-semibold'>Division:</span> {biodata.permanentDivision}</p>
-                  <p className="text-black text-xl"><span className='font-semibold'>Age:</span> <span className='text-orange-400 font-semibold'>{biodata.age}</span> years old</p>
-                  <p className="text-black text-xl"><span className='font-semibold'>Occupation:</span> {biodata.occupation}</p>
+                  <p className="text-black text-xl"><span className='font-semibold'>Age:</span> <span className='text-orange-400 font-semibold'>{biodata.age}</span></p>
+                  <p className="text-black text-xl"><span className='font-semibold'>Job:</span> {biodata.occupation}</p>
                   <Link to={`/details/${biodata._id}`}> <button className="mt-4 px-4 py-2 bg-[#c4ba8f] text-black font-semibold rounded-lg shadow hover:bg-[#b39c42]">View Profile</button></Link>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 
 function Biodata() {
   const navigate = useNavigate()
@@ -86,6 +87,9 @@ function Biodata() {
 
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Biodata</title>
+      </Helmet>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center pt-10'>Add BioData</h2>
       <div className='xl:w-[65%]  xl:mx-auto  border-2 border-[#302F2A] px-10 mt-5 rounded-xl'>
         <form onSubmit={handleSubmit} className='w-full py-10'>

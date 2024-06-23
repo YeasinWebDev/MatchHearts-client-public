@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,6 +55,9 @@ function ApprovedContactRequest() {
 
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Contact Request</title>
+      </Helmet>
       <h1 className='flex items-center justify-center text-xl md:text-4xl py-10 font-bold text-[#302F2A]'>Approved Contact Request</h1>
 
       <div className='md:mx-20 mx-0'>

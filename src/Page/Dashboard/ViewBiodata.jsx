@@ -6,6 +6,7 @@ import { GiBodyHeight } from "react-icons/gi";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 function ViewBiodata() {
   const { user } = useContext(AuthContext)
@@ -64,6 +65,9 @@ function ViewBiodata() {
 
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || View Biodata</title>
+      </Helmet>
       <h1 className='flex items-center justify-center text-xl md:text-4xl py-10 font-bold text-[#302F2A]'>View Biodata</h1>
       {isLoading && (
         <div className="flex w-full justify-center items-center py-10 ">

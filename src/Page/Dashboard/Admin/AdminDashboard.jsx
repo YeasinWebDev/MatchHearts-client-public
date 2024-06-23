@@ -7,7 +7,8 @@ import { IoBarChartSharp } from "react-icons/io5";
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer,Tooltip  } from 'recharts';
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { Helmet } from 'react-helmet';
 
 const mapdata = [
     { name: 'Group A', value: 400 },
@@ -51,6 +52,9 @@ function AdminDashboard() {
 
     return (
         <div>
+            <Helmet>
+                <title>MatchHearts || Admin Dashboard</title>
+            </Helmet>
             <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>Admin Dashboard</h2>
 
             <div className='flex gap-3 items-center justify-center flex-wrap'>

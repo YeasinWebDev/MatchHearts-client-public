@@ -1,6 +1,7 @@
 import React from 'react'
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 function Married() {
   const axiosSecure = useAxiosSecure()
@@ -35,6 +36,9 @@ function Married() {
   }
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Married</title>
+      </Helmet>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center py-10'>Add Story</h2>
       <div className='flex items-center justify-center pt-20'>
         <form onSubmit={handleSubmit} className='border-2  px-10 py-5 rounded-xl bg-[#F2F2F2]'>

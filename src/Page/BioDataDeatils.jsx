@@ -6,6 +6,7 @@ import { GiBodyHeight } from "react-icons/gi";
 import { AuthContext } from '../Auth/ContextProvider';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -101,6 +102,9 @@ function BioDataDeatils() {
 
     return (
         <div>
+            <Helmet>
+            <title>MatchHearts || Deatils Page</title>
+            </Helmet>
             <div>
                 <h1 className='flex items-center justify-center text-xl md:text-4xl py-10 font-bold text-[#302F2A]'>Biodata</h1>
 

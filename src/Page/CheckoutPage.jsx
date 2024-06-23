@@ -6,6 +6,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from '../Components/Payment/CheckoutForm';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet';
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK)
@@ -27,6 +28,9 @@ function CheckoutPage() {
   }, [])
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Checkout</title>
+      </Helmet>
       <h1 className='flex items-center justify-center text-xl md:text-4xl py-10 font-bold text-[#302F2A]'>Checkout</h1>
       <div className='mx-20  flex items-center justify-center flex-col'>
 

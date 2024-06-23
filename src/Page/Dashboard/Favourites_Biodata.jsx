@@ -12,6 +12,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Auth/ContextProvider';
+import { Helmet } from 'react-helmet';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,6 +55,9 @@ function Favourites_Biodata() {
 
   return (
     <div>
+      <Helmet>
+        <title>MatchHearts || Favourites Biodata</title>
+      </Helmet>
       <h2 className='text-4xl font-semibold text-[#302F2A] flex items-center justify-center pt-20'>Favourites Biodatas</h2>
       {isLoading && (
         <div className="flex w-full justify-center items-center py-10 ">
