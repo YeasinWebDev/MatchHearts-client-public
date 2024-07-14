@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React, { Suspense, lazy } from 'react';
+import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
-import './index.css'
+import './index.css';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,29 +11,29 @@ import ErrorPage from './Page/ErrorPage';
 import Home from './Page/Home';
 import ContextProvider from './Auth/ContextProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Login from './Page/Login';
-import SignUp from './Page/SignUp';
-import AboutUs from './Page/AboutUs';
-import ContactUs from './Page/ContactUs';
-import BiodatasPage from './Page/BiodatasPage';
-import BioDataDeatils from './Page/BioDataDeatils';
-import PrivateRoute from './Route/PrivateRoute';
-import CheckoutPage from './Page/CheckoutPage';
-import DashboardLayout from './Layouts/DashboardLayout';
-import Biodata from './Page/Dashboard/Biodata';
-import ViewBiodata from './Page/Dashboard/ViewBiodata';
-import MyContactRequest from './Page/Dashboard/MyContactRequest';
-import Favourites_Biodata from './Page/Dashboard/Favourites_Biodata';
-import AdminDashboard from './Page/Dashboard/Admin/AdminDashboard';
-import ManageUsers from './Page/Dashboard/Admin/ManageUsers';
-import ApprovedPremium from './Page/Dashboard/Admin/ApprovedPremium';
-import ApprovedContactRequest from './Page/Dashboard/Admin/ApprovedContactRequest';
-import SuccessStory from './Page/Dashboard/Admin/SuccessStory';
-import Married from './Page/Dashboard/Married';
+import LoadingSpinner from './Components/LoadingSpinner';
 
+const Login = lazy(() => import('./Page/Login'));
+const SignUp = lazy(() => import('./Page/SignUp'));
+const AboutUs = lazy(() => import('./Page/AboutUs'));
+const ContactUs = lazy(() => import('./Page/ContactUs'));
+const BiodatasPage = lazy(() => import('./Page/BiodatasPage'));
+const BioDataDeatils = lazy(() => import('./Page/BioDataDeatils'));
+const PrivateRoute = lazy(() => import('./Route/PrivateRoute'));
+const CheckoutPage = lazy(() => import('./Page/CheckoutPage'));
+const DashboardLayout = lazy(() => import('./Layouts/DashboardLayout'));
+const Biodata = lazy(() => import('./Page/Dashboard/Biodata'));
+const ViewBiodata = lazy(() => import('./Page/Dashboard/ViewBiodata'));
+const MyContactRequest = lazy(() => import('./Page/Dashboard/MyContactRequest'));
+const Favourites_Biodata = lazy(() => import('./Page/Dashboard/Favourites_Biodata'));
+const AdminDashboard = lazy(() => import('./Page/Dashboard/Admin/AdminDashboard'));
+const ManageUsers = lazy(() => import('./Page/Dashboard/Admin/ManageUsers'));
+const ApprovedPremium = lazy(() => import('./Page/Dashboard/Admin/ApprovedPremium'));
+const ApprovedContactRequest = lazy(() => import('./Page/Dashboard/Admin/ApprovedContactRequest'));
+const SuccessStory = lazy(() => import('./Page/Dashboard/Admin/SuccessStory'));
+const Married = lazy(() => import('./Page/Dashboard/Married'));
 
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -47,82 +47,79 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />
+        element: <Suspense fallback={<LoadingSpinner />}><Login /></Suspense>
       },
       {
         path: '/signup',
-        element: <SignUp />
+        element: <Suspense fallback={<LoadingSpinner />}><SignUp /></Suspense>
       },
       {
         path: "/aboutUs",
-        element: <AboutUs />
+        element: <Suspense fallback={<LoadingSpinner />}><AboutUs /></Suspense>
       },
       {
         path: '/contactUs',
-        element: <ContactUs />
+        element: <Suspense fallback={<LoadingSpinner />}><ContactUs /></Suspense>
       },
       {
         path: '/biodatas',
-        element: <BiodatasPage />
+        element: <Suspense fallback={<LoadingSpinner />}><BiodatasPage /></Suspense>
       },
       {
         path: '/details/:id',
-        element: <PrivateRoute><BioDataDeatils /></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><BioDataDeatils /></PrivateRoute></Suspense>
       },
       {
         path:"/checkoutPage/:id",
-        element:<PrivateRoute><CheckoutPage/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><CheckoutPage/></PrivateRoute></Suspense>
       },
-      
     ]
   },
-
   {
     path:'dashboard',
-    element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
+    element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><DashboardLayout/></PrivateRoute></Suspense>,
     children:[
       {
         path:'biodata',
-        element:<PrivateRoute><Biodata/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><Biodata/></PrivateRoute></Suspense>
       },
       {
         path:"viewBiodata",
-        element:<PrivateRoute><ViewBiodata/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><ViewBiodata/></PrivateRoute></Suspense>
       },
       {
         path:'myContactRequest',
-        element:<PrivateRoute><MyContactRequest/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><MyContactRequest/></PrivateRoute></Suspense>
       },
       {
         path:'favouritesBiodata',
-        element:<PrivateRoute><Favourites_Biodata/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><Favourites_Biodata/></PrivateRoute></Suspense>
       },
       {
         path:'adminDashboard',
-        element:<PrivateRoute><AdminDashboard/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><AdminDashboard/></PrivateRoute></Suspense>
       },
       {
         path:'manageUsers',
-        element:<PrivateRoute><ManageUsers/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><ManageUsers/></PrivateRoute></Suspense>
       },
       {
         path:'approvedPremium',
-        element:<PrivateRoute><ApprovedPremium/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><ApprovedPremium/></PrivateRoute></Suspense>
       },
       {
         path:'approvedContactRequest',
-        element:<PrivateRoute><ApprovedContactRequest/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><ApprovedContactRequest/></PrivateRoute></Suspense>
       },
       {
         path:'successStory',
-        element:<PrivateRoute><SuccessStory/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><SuccessStory/></PrivateRoute></Suspense>
       },
       {
         path:'married',
-        element:<PrivateRoute><Married/></PrivateRoute>
+        element: <Suspense fallback={<LoadingSpinner />}><PrivateRoute><Married/></PrivateRoute></Suspense>
       }
     ]
-
   }
 ]);
 
@@ -133,4 +130,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ContextProvider>
     <Toaster />
   </QueryClientProvider>
-)
+);
