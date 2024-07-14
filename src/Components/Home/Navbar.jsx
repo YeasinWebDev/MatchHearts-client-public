@@ -3,6 +3,8 @@ import { AuthContext } from '../../Auth/ContextProvider';
 import { Link, NavLink } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useRole from '../../Hooks/useRole';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 function Navbar() {
     const { dark, user, LogOut } = useContext(AuthContext);
@@ -19,27 +21,33 @@ function Navbar() {
         setIsOpen(!isOpen);
     };
 
+    useGSAP(() => {
+        gsap.from('#navitem', {y:'-100', duration: 1, stagger:0.4, ease:'bounce'})
+    })
+
     return (
         <div className='bg-[#302F2A] relative'>
             <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2   bg-[#302F2A]`}>
 
                 {/* left */}
-                <Link to={'/'}><div className='w-16 h-16 rounded-xl'>
-                    <img className='w-full h-full rounded-xl' src="https://i.ibb.co/0JfPLPG/main.png" alt="" />
-                </div></Link>
+                <Link to={'/'}>
+                <div id='navitem' className='w-16 h-16 rounded-xl'>
+                    <img  className='w-full h-full rounded-xl' src="https://i.ibb.co/0JfPLPG/main.png" alt="" />
+                </div>
+                </Link>
 
                 {/* right */}
                 <div className={`lg:hidden ${dark ? 'text-white' : "text-black"}`} onClick={toggleMenu}>
-                    <button className="text-2xl">&#9776;</button>
+                    <button className="text-2xl text-white">&#9776;</button>
                 </div>
 
                 {/* Menu for large screens */}
                 <div className={`hidden lg:flex ${dark ? 'bg-[#232121] text-white' : 'bg-[#F2f2f2] text-black'}`}>
                     <ul className='flex bg-[#302F2A] justify-center gap-5'>
-                        <NavLink to={'/'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Home</NavLink>
-                        <NavLink to={'/biodatas'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Biodatas</NavLink>
-                        <NavLink to={'/aboutUs'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>About Us</NavLink>
-                        <NavLink to={'/contactUs'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Contact Us</NavLink>
+                        <NavLink id='navitem' to={'/'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Home</NavLink>
+                        <NavLink id='navitem' to={'/biodatas'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Biodatas</NavLink>
+                        <NavLink id='navitem' to={'/aboutUs'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>About Us</NavLink>
+                        <NavLink id='navitem' to={'/contactUs'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Contact Us</NavLink>
                         {
                             user ?
                                 <>
@@ -52,7 +60,7 @@ function Navbar() {
                                     }
                                     {/* /dashboard/adminDashboard */}
                                     <div className='w-10 h-10'>
-                                        <img
+                                        <img  id='navitem'
                                             onClick={() => setShow(!show)}
                                             className='rounded-full w-full h-full cursor-pointer'
                                             referrerPolicy='no-referrer'
@@ -61,7 +69,7 @@ function Navbar() {
                                     </div>
                                 </> :
                                 <>
-                                    <NavLink to={'/login'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Login</NavLink>
+                                    <NavLink id='navitem' to={'/login'} className={({ isActive }) => `font-semibold text-lg  cursor-pointer ${isActive ? 'bg-[#C4BA8F] text-black rounded-xl p-2' : 'text-white p-2'}`}>Login</NavLink>
 
                                 </>
                         }
