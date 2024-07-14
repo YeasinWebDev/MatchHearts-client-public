@@ -5,6 +5,8 @@ Live Link: [matchhearts.com](https://m-12-a9ab6.web.app/)
 Admin Email: arafat@gmail.com
 Password: 123456
 
+Server:https://github.com/YeasinWebDev/a12-server-public
+
 ## Features of MatchHearts
 
    1. ### Comprehensive User Profiles
@@ -41,32 +43,15 @@ Password: 123456
 
 ## Technology
 ### Frontend
-
-   * @emotion/react: ^11.11.4
-   * @emotion/styled: ^11.11.5
-   * @material-tailwind/react: ^2.1.9
-   * @mui/material: ^5.15.19
-   * @mui/styled-engine-sc: ^6.0.0-alpha.18
-   * @stripe/react-stripe-js: ^2.7.1
-   * @stripe/stripe-js: ^3.5.0
-   * @tanstack/react-query: ^5.40.0
    * axios: ^1.7.2
    * firebase: ^10.12.2
-   * localforage: ^1.10.0
    * match-sorter: ^6.3.4
-   * react: ^18.2.0
-   * react-dom: ^18.2.0
    * react-helmet: ^6.1.0
    * react-hook-form: ^7.51.5
    * react-hot-toast: ^2.4.1
    * react-icons: ^5.2.1
-   * react-router-dom: ^6.23.1
-   * react-select: ^5.8.0
-   * react-spinners: ^0.13.8
    * recharts: ^2.12.7
-   * sort-by: ^1.2.0
    * stripe: ^15.9.0
-   * styled-components: ^6.1.11
    * sweetalert2: ^11.11.1
    * swiper: ^11.1.4
 
@@ -79,3 +64,15 @@ Password: 123456
    * jsonwebtoken: ^9.0.2
    * mongodb: ^6.7.0
    * stripe: ^15.9.0
+
+## How to Start This Project
+
+To start the MatchHearts project, follow these steps:
+
+1. Clone this repository to your local machine using `git clone <repository-url>`.
+2. Navigate to the project directory: `cd MatchHearts`.
+3. Install dependencies using your package manager (npm or yarn): `npm install` or `yarn install`.
+4. Start the Vite development server: `npm run dev` or `yarn dev`.
+5. Open your browser and visit `http://localhost:3000` to view the MatchHearts website.
+
+Feel free to explore MatchHearts and embark on your learning journey today!
