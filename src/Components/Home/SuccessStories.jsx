@@ -30,8 +30,8 @@ function SuccessStories() {
     return (
         <div className=" py-10  w-full bg-[#FEFBF0]">
             <div className='flex items-center justify-center flex-col'>
-                <h2 className="text-3xl font-semibold text-center mb-4  w-full">Success Stories</h2>
-                <p className="text-center text-gray-600 lg:w-[50%] mb-8  w-full">
+                <h2 className="text-3xl  lg:text-4xl font-bold text-center mb-4  w-full">Success Stories</h2>
+                <p className="text-center text-gray-600 lg:w-[50%] mb-8  w-full font-semibold">
                     Hear from couples who found their perfect match on MatchHearts. These stories are a testament to the love and happiness that our platform has helped create.
                 </p>
             </div>

@@ -21,7 +21,7 @@ function Navbar() {
 
     return (
         <div className='bg-[#302F2A] relative'>
-            <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2 rounded-xl  bg-[#302F2A]`}>
+            <div className={`flex justify-between items-center border-2 w-full md:px-20 px-5 py-2   bg-[#302F2A]`}>
 
                 {/* left */}
                 <Link to={'/'}><div className='w-16 h-16 rounded-xl'>

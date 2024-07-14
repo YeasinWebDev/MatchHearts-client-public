@@ -31,8 +31,8 @@ function PremiumMembers() {
 
     return (
         <div className='flex items-center justify-center flex-col bg-[#FEFBF0]'>
-            <h2 className="text-3xl font-semibold text-center mb-4 pt-10">Meet Our Premium Members</h2>
-            <p className="text-center text-gray-600 lg:w-[50%] mb-8">Discover our premium members who are actively seeking their perfect match. Each profile is carefully selected to showcase individuals ready for a meaningful connection. Explore their biodata to learn more and start your journey towards finding true love.</p>
+            <h2 className="text-3xl  lg:text-4xl font-bold text-center mb-4 pt-10">Meet Our Premium Members</h2>
+            <p className="text-center text-gray-600 lg:w-[60%] xl:w-[50%] mb-8 font-semibold">Discover our premium members who are actively seeking their perfect match. Each profile is carefully selected to showcase individuals ready for a meaningful connection</p>
             <div className="mb-4">
                 <label htmlFor="sortOrder" className="mr-2 text-lg font-semibold">Sort by Age:</label>
                 <select id="sortOrder" value={sortOrder} onChange={handleSortOrderChange} className="p-2 border rounded outline-none">
