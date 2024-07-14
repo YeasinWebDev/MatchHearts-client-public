@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Drawer, Slider } from '@mui/material';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -7,6 +7,8 @@ import useAxiosCommon from '../Hooks/useAxiosCommon';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { FiFilter } from 'react-icons/fi';
+import { gsap } from 'gsap'
+import { useGSAP } from '@gsap/react';
 
 function BiodatasPage() {
   const axiosCommon = useAxiosCommon();
@@ -66,7 +68,16 @@ function BiodatasPage() {
       selectedOption.length === 0 || selectedOption.some((option) => option.value === biodata.permanentDivision);
     return ageMatch && genderMatch && divisionMatch;
   });
-
+  useGSAP(() => {
+    gsap.from('.card', {
+      y: 50,
+      opacity: 0,
+      duration: 1.5,
+      stagger: 0.4,
+      ease: 'power4.out' 
+    });
+  },[isLoading])
+  
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-10">
@@ -188,9 +199,12 @@ function BiodatasPage() {
 
         {/* biodatas */}
         <div className='w-full md:w-[100%] xl:w-[80%]'>
-          <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
-            {filteredBiodatas.map((biodata) => (
-              <div key={biodata._id} className="bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 relative">
+          <div className='container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
+            
+            {filteredBiodatas.length === 0 ?  <h1 className='text-2xl md:text-5xl font-bold text-[#302F2A]'>No Biodata Found</h1>
+            : 
+            filteredBiodatas.map((biodata) => (
+              <div key={biodata._id} className="card bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 relative">
                 <img src={biodata.profileImage} alt={`Profile of ${biodata.name}`} className="lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
                 <div className="flex flex-col w-full">
                   <h3 className="text-xl font-semibold absolute bg-[#302F2A] rounded-full w-10 h-10 flex items-center justify-center text-white top-2">{biodata.biodata_id}</h3>
