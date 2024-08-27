@@ -6,7 +6,7 @@ import Footer from '../Components/Home/Footer'
 function Route() {
   return (
     <>
-    <div className='bg-[#302F2A]'>
+    <div className=''>
       <Navbar />
     </div>
       <div className='w-full min-h-screen'>

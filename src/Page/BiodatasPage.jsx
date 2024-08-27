@@ -89,7 +89,7 @@ function BiodatasPage() {
   }
 
   return (
-    <div className='w-full min-h-screen bg-[#FEFBF0] py-5'>
+    <div className='w-full min-h-screen bg-[#fff] py-5'>
       <Helmet>
         <title>MatchHearts || Biodatas Page</title>
       </Helmet>
@@ -204,10 +204,9 @@ function BiodatasPage() {
             {filteredBiodatas.length === 0 ?  <h1 className='text-2xl md:text-5xl font-bold text-[#302F2A]'>No Biodata Found</h1>
             : 
             filteredBiodatas.map((biodata) => (
-              <div key={biodata._id} className="card bg-[#FFFCF0] text-black shadow-lg rounded-lg p-6 relative">
-                <img src={biodata.profileImage} alt={`Profile of ${biodata.name}`} className="lg:w-[20vw] mx-auto h-48 object-cover rounded-md mb-4" />
+              <div key={biodata._id} className="card bg-[#f5f5f3] text-black shadow-lg rounded-lg p-6 relative w-[22rem]">
+                <img src={biodata.profileImage} alt={`Profile of ${biodata.name}`} className="lg:w-[20vw] w-full mx-auto h-48 object-cover rounded-md mb-4" />
                 <div className="flex flex-col w-full">
-                  <h3 className="text-xl font-semibold absolute bg-[#302F2A] rounded-full w-10 h-10 flex items-center justify-center text-white top-2">{biodata.biodata_id}</h3>
                   <h3 className="text-xl font-semibold flex gap-2 ">Biodata Type: <span className='text-orange-400 font-semibold'>{biodata.biodataType}</span></h3>
                   <p className="text-black text-xl"><span className='font-semibold'>Division:</span> {biodata.permanentDivision}</p>
                   <p className="text-black text-xl"><span className='font-semibold'>Age:</span> <span className='text-orange-400 font-semibold'>{biodata.age}</span></p>

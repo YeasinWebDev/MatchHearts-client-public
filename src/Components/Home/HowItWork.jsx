@@ -25,7 +25,7 @@ function HowItWork() {
   ];
 
   return (
-    <div className="flex items-center justify-center flex-col pt-20 bg-[#FEFBF0]">
+    <div className="flex items-center justify-center flex-col pt-20 bg-[#Fff]">
       <h2 className="text-3xl  lg:text-4xl font-bold text-center mb-4">How It Works</h2>
       <p className="text-center text-gray-600 lg:w-[40%] mb-8 font-semibold">
         Our platform is designed to make it easy for you to find your perfect match. Follow these simple steps to start your journey towards a meaningful relationship.

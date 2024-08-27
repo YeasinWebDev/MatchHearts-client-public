@@ -12,13 +12,13 @@ function ContactUs() {
     };
 
     return (
-        <div className="w-full min-h-screen mx-auto py-10 px-5 bg-[#FEFBF0]">
+        <div className="w-full min-h-screen mx-auto py-10 px-5 bg-[#fff]">
             <Helmet>
                 <title>MatchHearts || Contact Us</title>
             </Helmet>
             <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">Contact Us</h1>
 
-            <p className="text-lg text-center text-gray-700 mb-10">
+            <p className="text-lg text-center text-gray-700 mb-10 w-full lg:w-[60%] mx-auto">
                 We would love to hear from you! Whether you have a question about our services, need assistance, or just want to share your experience, please don't hesitate to reach out.
             </p>
 
@@ -36,7 +36,7 @@ function ContactUs() {
                     </p>
                 </div>
 
-                <div className="lg:w-1/2">
+                <div className="lg:w-1/2 border-2 p-10 rounded-xl border-[#41403b]">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-5">Send Us a Message</h2>
                     <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                         <div>
@@ -74,7 +74,7 @@ function ContactUs() {
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-[#302F2A] text-white px-4 py-2 rounded-md  focus:outline-none focus:ring-2 "
+                            className="w-full bg-[#323029] text-white px-4 py-2 rounded-md  focus:outline-none focus:ring-2 "
                         >
                             Send Message
                         </button>

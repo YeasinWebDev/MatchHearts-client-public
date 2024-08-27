@@ -15,7 +15,7 @@ function SuccessCounter() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="flex items-center justify-center flex-col py-20 bg-[#FEFBF0]">
+    <div className="flex items-center justify-center flex-col py-20 bg-[#fff]">
       <h2 className="text-3xl  lg:text-4xl font-bold text-center mb-4">Our Success</h2>
       <p className="text-center text-gray-600 lg:w-[30%] mb-8 font-semibold">
         Discover the impact we have made through our platform. Here are some of our achievements.

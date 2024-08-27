@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 function AboutUs() {
     return (
-        <div className="bg-[#FEFBF0] min-h-screen py-10">
+        <div className="bg-[#fff] min-h-screen py-10">
             <Helmet>
                 <title>MatchHearts || About Us</title>
             </Helmet>

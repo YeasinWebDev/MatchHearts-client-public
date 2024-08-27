@@ -28,7 +28,7 @@ function SuccessStories() {
     if (isLoading) return <div>Loading...</div>;
 
     return (
-        <div className=" py-10  w-full bg-[#FEFBF0]">
+        <div className=" py-10  w-full bg-[#fff]">
             <div className='flex items-center justify-center flex-col'>
                 <h2 className="text-3xl  lg:text-4xl font-bold text-center mb-4  w-full">Success Stories</h2>
                 <p className="text-center text-gray-600 lg:w-[50%] mb-8  w-full font-semibold">
@@ -49,7 +49,7 @@ function SuccessStories() {
                 {
                     data.map(story => (
                         <SwiperSlide key={story._id}>
-                            <div key={story._id} className="bg-[#FEFBF0] text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center">
+                            <div key={story._id} className="bg-[#fff] text-black shadow-lg rounded-lg p-6 mx-5 flex flex-col items-center">
                                 <img src={story.coupleImage} alt="Couple" className="w-[30vw] h-[30vh] object-cover  rounded-md mb-4" />
                                 <div className="flex items-center mb-2">
                                     {Array(story.reviewStar).fill().map((_, i) => (
