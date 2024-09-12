@@ -7,7 +7,7 @@ Password: 123456
 
 Server:https://github.com/YeasinWebDev/a12-server-public
 
-## Features of MatchHearts
+## 🚀 Features of MatchHearts
 
    1. ### Comprehensive User Profiles
    => Users can create detailed profiles including personal information, interests, and preferences to help find the perfect match.
@@ -41,7 +41,7 @@ Server:https://github.com/YeasinWebDev/a12-server-public
 
 
 
-## Technology
+## 🛠️ Technology
 ### Frontend
    * axios: ^1.7.2
    * firebase: ^10.12.2
@@ -65,7 +65,7 @@ Server:https://github.com/YeasinWebDev/a12-server-public
    * mongodb: ^6.7.0
    * stripe: ^15.9.0
 
-## How to Start This Project
+## 📦 How to Start This Project
 
 To start the MatchHearts project, follow these steps:
 
