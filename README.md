@@ -76,3 +76,9 @@ To start the MatchHearts project, follow these steps:
 5. Open your browser and visit `http://localhost:3000` to view the MatchHearts website.
 
 Feel free to explore MatchHearts and embark on your learning journey today!
+
+## 📧 Contact
+If you have any questions or suggestions, feel free to reach out!
+
+* Portfolio : [Yeasin Arafat](https://yeasin-arafat-portfolio.netlify.app)
+* LinkedIn: [Yeasin Arafat](https://www.linkedin.com/in/yeasinarafat121)
